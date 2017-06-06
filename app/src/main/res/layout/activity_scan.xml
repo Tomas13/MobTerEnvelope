@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kazpost.kz.mobterminal.ui.scan.ScanActivity">
+
+
+    <TextView
+        android:id="@+id/tv_scan_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/scan_package"
+        android:textColor="@color/black_effective"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_tracknumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/tv_scan_top"
+        android:text="QS270000161KZ"
+        android:textColor="@color/colorBlue"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_found_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_scan_top"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlue"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="2"
+                android:padding="5dp"
+                android:text="@string/cell_tracknumber"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+
+                android:text="@string/cell_number"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlue"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_bag_barcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/colorBlueLight"
+                android:padding="5dp"
+                android:text="M84"
+                android:textColor="@color/black_effective" />
+
+
+            <TextView
+                android:id="@+id/tv_bag_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pink"
+                android:padding="5dp"
+                android:text="M84"
+                android:textColor="@color/black_effective"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_scan_bag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_found_plan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/scan_cell"
+        android:textAlignment="center" />
+
+    <EditText
+        android:imeOptions="flagNoFullscreen"
+        android:id="@+id/et_scan_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_scan_bag"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_background"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/et_scan_bag_activity"
+        android:imeOptions="flagNoFullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_scan_activity"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_background"
+        android:visibility="gone" />
+
+
+</RelativeLayout>
