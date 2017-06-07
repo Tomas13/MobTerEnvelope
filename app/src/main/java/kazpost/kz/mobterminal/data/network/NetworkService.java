@@ -5,7 +5,9 @@ import kazpost.kz.mobterminal.data.network.model.closebag.CloseBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -33,4 +35,6 @@ public interface NetworkService {
     @Headers("Content-Type: text/xml")
     Observable<kazpost.kz.mobterminal.data.network.model.closebag.Envelope> closeBagRequest(@Body CloseBagEnvelope closeBagEnvelope);
 
+    @GET("/")
+    Observable<ResponseBody> sendToPrint();
 }

@@ -3,6 +3,7 @@ package kazpost.kz.mobterminal.ui.print;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +24,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.data.network.NetworkService;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
+import static kazpost.kz.mobterminal.ui.print.Singleton.getUserClient;
 import static kazpost.kz.mobterminal.utils.AppConstants.BAG_TYPE;
 import static kazpost.kz.mobterminal.utils.AppConstants.CLOSE_BAG_TIME;
 import static kazpost.kz.mobterminal.utils.AppConstants.FROM_DEP;
@@ -80,6 +89,14 @@ public class PrintActivity extends BaseActivity {
     Button btnChoosePrinter;
     @BindView(R.id.btn_repeat_print)
     Button btnRepeatPrint;
+    @BindView(R.id.et_ip_address)
+    EditText etIpAddress;
+    @BindView(R.id.et_printer_name)
+    EditText etPrinterName;
+
+    String gNumber, sealNumber, weightResponse, fromDep,
+            toDep, sendMethod, bagType, operatorName, date2,
+            closeTime, ipAddress, printerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,20 +106,22 @@ public class PrintActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
-        bt = new BluetoothSPP(this);
+
+
+        sendToPrint();
 
 
         if (bundle != null) {
-            String gNumber = bundle.getString(G_NUMBER, "G000000000");
-            String sealNumber = bundle.getString(SEAL_NUMBER, "00000");
-            String weightResponse = bundle.getString(WEIGHT_RESPONSE, "0");
-            String fromDep = bundle.getString(FROM_DEP, "fromDep");
-            String toDep = bundle.getString(TO_DEP, "toDep");
-            String sendMethod = bundle.getString(SEND_METHOD, "sendMethod");
-            String bagType = bundle.getString(BAG_TYPE, "bagType");
-            String operatorName = bundle.getString(OPERATOR_NAME, "operatorName");
-            String closeTime = bundle.getString(CLOSE_BAG_TIME, "00:00");
-            String date2 = "date";
+            gNumber = bundle.getString(G_NUMBER, "G000000000");
+            sealNumber = bundle.getString(SEAL_NUMBER, "00000");
+            weightResponse = bundle.getString(WEIGHT_RESPONSE, "0");
+            fromDep = bundle.getString(FROM_DEP, "fromDep");
+            toDep = bundle.getString(TO_DEP, "toDep");
+            sendMethod = bundle.getString(SEND_METHOD, "sendMethod");
+            bagType = bundle.getString(BAG_TYPE, "bagType");
+            operatorName = bundle.getString(OPERATOR_NAME, "operatorName");
+            closeTime = bundle.getString(CLOSE_BAG_TIME, "00:00");
+            date2 = "date";
 
             SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
             try {
@@ -111,7 +130,7 @@ public class PrintActivity extends BaseActivity {
                 SimpleDateFormat formatter2 = new SimpleDateFormat("dd.MM.yyyy 'в' HH:mm:ss", Locale.US);
                 date2 = formatter2.format(date);
 
-//                Toast.makeText(this, date2.toString(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(this, date2.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("PrintActivity: ", date2);
 
             } catch (ParseException e) {
@@ -129,6 +148,50 @@ public class PrintActivity extends BaseActivity {
             tvOperatorName.setText(operatorTitle + " " + operatorName);
 
         }
+
+    }
+
+    private void sendToPrint() {
+//
+//        getUserClient(String gnumber,
+//                String operatorname,
+//                String sealnumber,
+//                String deliverytype,
+//                String date,
+//                String weightkg,
+//                String weightgr,
+//                String fromdep,
+//                String todep,
+//                String deliverydoc){
+
+        Retrofit retrofitRoutes = new Retrofit.Builder()
+                .baseUrl("http://192.168.204.91:8585")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+                .client(getUserClient("G3092323478923",
+                        "Коктеубаева Айжан",
+                        "239023",
+                        "авиа",
+                        "12:32:12",
+                        "3",
+                        "500",
+                        "Алматы",
+                        "Астана",
+                        "Без акта",
+                        "192.168.204.75",
+                        "Honeywell PM42 (203 dpi)"
+                        ))
+                .build();
+
+
+        NetworkService gitHubServ = retrofitRoutes.create(NetworkService.class);
+
+        Observable<ResponseBody> sendPrint = gitHubServ.sendToPrint();
+
+        sendPrint.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responseBody -> Log.d("PrintA", responseBody.toString()),
+                        throwable -> Log.d("PrintAT", throwable.getMessage()));
     }
 
     @OnClick({R.id.btn_choose_printer, R.id.btn_repeat_print})
@@ -139,34 +202,16 @@ public class PrintActivity extends BaseActivity {
                 startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
                 break;
             case R.id.btn_repeat_print:
+
+                ipAddress = etIpAddress.getText().toString();
+                printerName = etPrinterName.getText().toString();
+
+                if (ipAddress != null & printerName != null){
+                    sendToPrint();
+                }
+
                 break;
         }
     }
 
-    private BluetoothSPP bt;
-
-    public void onStart() {
-        super.onStart();
-        if (!bt.isBluetoothEnabled()) {
-            // Do somthing if bluetooth is disable
-        } else {
-            // Do something if bluetooth is already enable
-        }
-    }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
-            if(resultCode == Activity.RESULT_OK)
-                bt.connect(data);
-        } else if(requestCode == BluetoothState.REQUEST_ENABLE_BT) {
-            if(resultCode == Activity.RESULT_OK) {
-                bt.setupService();
-                bt.startService(BluetoothState.DEVICE_ANDROID);
-//                setup();
-            } else {
-                // Do something if user doesn't choose any device (Pressed back)
-            }
-        }
-    }
 }

@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kazpost.kz.mobterminal.ui.print.PrintActivity">
 
     <LinearLayout
+        android:id="@+id/ll_printer_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_ip_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="@string/ip_address" />
+
+        <EditText
+            android:id="@+id/et_printer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:hint="@string/printer_name" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/ll_main_print"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_printer_info"
         android:layout_margin="5dp"
         android:weightSum="2">
 
@@ -28,14 +53,12 @@
                 android:text="Номер G накладной: G20170203001524"
                 android:textColor="@color/white" />
 
-
             <TextView
                 android:id="@+id/tv_seal_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Номер пломбы: 1954928"
                 android:textColor="@color/white" />
-
 
             <TextView
                 android:id="@+id/tv_weight"
@@ -70,12 +93,12 @@
                 android:textColor="@color/white" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tv_to_dep_index"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Индекс пункта назначения: [050054]"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_to_dep_name"
@@ -111,18 +134,18 @@
             style="@style/BlueButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
             android:layout_weight="1"
-            android:text="@string/chose_printer" />
+            android:text="@string/chose_printer"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btn_repeat_print"
             style="@style/BlueButton"
             android:layout_width="0dp"
-            android:textSize="10sp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"
-            android:text="@string/repeat_label_print" />
+            android:text="@string/repeat_label_print"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <TextView

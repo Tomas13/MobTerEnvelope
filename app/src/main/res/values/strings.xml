@@ -38,4 +38,6 @@
     <string name="to_dep_index">Индекс пункта назначения:</string>
     <string name="to_dep_name">Название пункта назначения:</string>
     <string name="pin_length">Пин-код должен состоять из 4-х символов</string>
+    <string name="ip_address">сканируйте ip-адрес</string>
+    <string name="printer_name">Принтер</string>
 </resources>

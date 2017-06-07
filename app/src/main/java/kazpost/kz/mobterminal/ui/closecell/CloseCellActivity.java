@@ -66,8 +66,6 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                     onErrorToast("Заполните все поля");
                 }
 
-
-
                 break;
         }
     }
