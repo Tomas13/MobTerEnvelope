@@ -20,6 +20,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_SESSION_ID = "PREF_KEY_SESSION_ID";
     private static final String PREF_KEY_DATE_TIME = "PREF_KEY_DATE_TIME";
+    private static final String PREF_KEY_PRINTER_IP = "PREF_KEY_PRINTER_IP";
+    private static final String PREF_KEY_PRINTER_NAME = "PREF_KEY_PRINTER_NAME";
 
 
     @Inject
@@ -36,6 +38,22 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public void saveLastLoginTime(String dateTime) {
         mPrefs.edit().putString(PREF_KEY_DATE_TIME, dateTime).apply();
+    }
+
+    @Override
+    public void savePrinter(String ipAddress, String printerName) {
+        mPrefs.edit().putString(PREF_KEY_PRINTER_IP, ipAddress).apply();
+        mPrefs.edit().putString(PREF_KEY_PRINTER_NAME, printerName).apply();
+    }
+
+    @Override
+    public String getPrinterIp() {
+        return mPrefs.getString(PREF_KEY_PRINTER_IP, null);
+    }
+
+    @Override
+    public String getPrinterName() {
+        return mPrefs.getString(PREF_KEY_PRINTER_NAME, null);
     }
 
     @Override

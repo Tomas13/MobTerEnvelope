@@ -79,6 +79,21 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void savePrinter(String ipAddress, String printerName) {
+        mPreferencesHelper.savePrinter(ipAddress, printerName);
+    }
+
+    @Override
+    public String getPrinterIp() {
+        return mPreferencesHelper.getPrinterIp();
+    }
+
+    @Override
+    public String getPrinterName() {
+        return mPreferencesHelper.getPrinterName();
+    }
+
+    @Override
     public String getSessionId() {
         return mPreferencesHelper.getSessionId();
     }

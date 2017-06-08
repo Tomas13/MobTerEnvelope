@@ -1,9 +1,7 @@
 package kazpost.kz.mobterminal.ui.print;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import javax.inject.Inject;
+
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
 import butterknife.BindString;
@@ -24,8 +23,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.data.network.NetworkService;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.main.MainActivity;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -47,6 +48,9 @@ import static kazpost.kz.mobterminal.utils.AppConstants.WEIGHT_RESPONSE;
 
 public class PrintActivity extends BaseActivity {
 
+
+    @Inject
+    DataManager dataManager;
 
     @BindView(R.id.tv_g_number)
     TextView tvGNumber;
@@ -85,14 +89,10 @@ public class PrintActivity extends BaseActivity {
     String toDepNameTitle;
     @BindString(R.string.bag_close_time)
     String closeTimeTitle;
-    @BindView(R.id.btn_choose_printer)
-    Button btnChoosePrinter;
+    //    @BindView(R.id.btn_choose_printer)
+//    Button btnChoosePrinter;
     @BindView(R.id.btn_repeat_print)
     Button btnRepeatPrint;
-    @BindView(R.id.et_ip_address)
-    EditText etIpAddress;
-    @BindView(R.id.et_printer_name)
-    EditText etPrinterName;
 
     String gNumber, sealNumber, weightResponse, fromDep,
             toDep, sendMethod, bagType, operatorName, date2,
@@ -104,12 +104,10 @@ public class PrintActivity extends BaseActivity {
         setContentView(R.layout.activity_print);
         ButterKnife.bind(this);
 
+        getActivityComponent().inject(this);
+
+
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
-
-
-
-        sendToPrint();
-
 
         if (bundle != null) {
             gNumber = bundle.getString(G_NUMBER, "G000000000");
@@ -126,16 +124,11 @@ public class PrintActivity extends BaseActivity {
             SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
             try {
                 Date date = formatter3.parse(closeTime);
-
                 SimpleDateFormat formatter2 = new SimpleDateFormat("dd.MM.yyyy 'в' HH:mm:ss", Locale.US);
                 date2 = formatter2.format(date);
-
-//              Toast.makeText(this, date2.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("PrintActivity: ", date2);
-
             } catch (ParseException e) {
                 Log.d("PrintActivity: ", e.toString());
-
             }
 
 
@@ -146,41 +139,41 @@ public class PrintActivity extends BaseActivity {
             tvToDepName.setText(toDepNameTitle + " " + toDep);
             tvCloseBagTime.setText(closeTimeTitle + " " + date2);
             tvOperatorName.setText(operatorTitle + " " + operatorName);
-
         }
-
     }
 
     private void sendToPrint() {
-//
-//        getUserClient(String gnumber,
-//                String operatorname,
-//                String sealnumber,
-//                String deliverytype,
-//                String date,
-//                String weightkg,
-//                String weightgr,
-//                String fromdep,
-//                String todep,
-//                String deliverydoc){
 
         Retrofit retrofitRoutes = new Retrofit.Builder()
-                .baseUrl("http://192.168.204.91:8585")
+                .baseUrl("http://192.168.204.85:8585")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
-                .client(getUserClient("G3092323478923",
-                        "Коктеубаева Айжан",
-                        "239023",
-                        "авиа",
-                        "12:32:12",
-                        "3",
+//                .client(getUserClient("G3092323478923",
+//                        "Коктеубаева Айжан",
+//                        "239023",
+//                        "авиа",
+//                        "12:32:12",
+//                        "3",
+//                        "500",
+//                        "Алматы",
+//                        "Астана",
+//                        "Без акта",
+//                        "192.168.204.75",
+//                        "Honeywell"
+//                ))
+
+                .client(getUserClient(gNumber,
+                        operatorName,
+                        sealNumber,
+                        bagType,
+                        date2,
+                        weightResponse,
                         "500",
-                        "Алматы",
-                        "Астана",
+                        fromDep,
+                        toDep,
                         "Без акта",
                         "192.168.204.75",
-                        "Honeywell PM42 (203 dpi)"
-                        ))
+                        "Honeywell"
+                ))
                 .build();
 
 
@@ -194,19 +187,18 @@ public class PrintActivity extends BaseActivity {
                         throwable -> Log.d("PrintAT", throwable.getMessage()));
     }
 
-    @OnClick({R.id.btn_choose_printer, R.id.btn_repeat_print})
+    @OnClick({R.id.btn_go_main, R.id.btn_repeat_print})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_choose_printer:
-                Intent intent = new Intent(getApplicationContext(), DeviceList.class);
-                startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+            case R.id.btn_go_main:
+                startActivity(this, new MainActivity());
                 break;
             case R.id.btn_repeat_print:
 
-                ipAddress = etIpAddress.getText().toString();
-                printerName = etPrinterName.getText().toString();
+                ipAddress = dataManager.getPrinterIp();
+                printerName = dataManager.getPrinterName();
 
-                if (ipAddress != null & printerName != null){
+                if (ipAddress != null & printerName != null) {
                     sendToPrint();
                 }
 

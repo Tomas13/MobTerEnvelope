@@ -70,6 +70,11 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     }
 
     @Override
+    public void clearBagEditText(){
+        etScanBagActivity.setText("");
+    }
+
+    @Override
     public void showBagTrackNumber(String bagBarcode, String bagNumber) {
 
         tvScanTop.setText(cellTrack);
@@ -110,7 +115,8 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @OnTextChanged(R.id.et_scan_bag_activity)
     public void onBagScan() {
         if (etScanBagActivity.getText().toString().length() > 0)
-            presenter.onBagScan(etScanActivity.getText().toString(), mBagBarcode);
+            presenter.onBagScan(etScanActivity.getText().toString(),
+                    etScanBagActivity.getText().toString());
     }
 
     @Override

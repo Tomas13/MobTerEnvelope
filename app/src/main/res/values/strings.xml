@@ -40,4 +40,5 @@
     <string name="pin_length">Пин-код должен состоять из 4-х символов</string>
     <string name="ip_address">сканируйте ip-адрес</string>
     <string name="printer_name">Принтер</string>
+    <string name="scanipname">Для выбора принтера просканируйте ip-адрес и название принтера</string>
 </resources>

@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
+import kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity;
 import kazpost.kz.mobterminal.ui.scan.ScanActivity;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openConfigPrinter() {
+        startActivity(this, new ChoosePrinterActivity());
 
     }
 

@@ -23,6 +23,8 @@ import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
+import kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity;
+import kazpost.kz.mobterminal.ui.print.PrintActivity;
 import kazpost.kz.mobterminal.ui.scan.ScanActivity;
 
 /**
@@ -40,5 +42,8 @@ public interface ActivityComponent {
     void inject(CloseCellActivity activity);
 
     void inject(ScanActivity activity);
+
+    void inject(PrintActivity activity);
+    void inject(ChoosePrinterActivity activity);
 
 }

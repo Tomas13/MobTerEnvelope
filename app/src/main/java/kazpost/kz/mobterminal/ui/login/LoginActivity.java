@@ -59,9 +59,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     public void onViewClicked() {
         userBarcode = etCode.getText().toString();
         mPresenter.onLoginCodeScan();
-
     }
-
 
     @OnClick(R.id.btn_login_exit)
     public void onExitClicked() {

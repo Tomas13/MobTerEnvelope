@@ -77,6 +77,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     getMvpView().onErrorToast(text);
                                     getMvpView().startLoginActivity();
                                     break;
+                                case "300": //User not authorized
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().clearBagEditText();
+                                    break;
 
 
                                 default:
@@ -146,6 +150,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                 case "106": //Session expired
                                     getMvpView().onErrorToast(text);
                                     getMvpView().startLoginActivity();
+                                    break;
+                                case "300": //User not authorized
+                                    getMvpView().onErrorToast(text);
+                                    getMvpView().clearBagEditText();
                                     break;
 
                                 case "6":

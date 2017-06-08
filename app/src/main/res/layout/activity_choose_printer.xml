@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlueLight"
+        android:text="IP-адрес"
+        android:id="@+id/tv_server"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:visibility="gone"
+        android:layout_margin="5dp"
+        android:layout_below="@id/tv_server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ip-адрес сервера"
+        android:id="@+id/et_server_address"/>
+
+    <TextView
+        android:background="@color/colorBlueLight"
+        android:layout_below="@id/et_server_address"
+        android:id="@+id/tv_scan_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:text="@string/scanipname"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_printer_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_scan_ip"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_ip_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ip_address" />
+
+        <EditText
+            android:id="@+id/et_printer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/printer_name" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_printer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_printer_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Выбрать принтер" />
+</RelativeLayout>
