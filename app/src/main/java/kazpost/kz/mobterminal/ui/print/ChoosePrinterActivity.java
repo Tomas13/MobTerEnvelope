@@ -51,5 +51,16 @@ public class ChoosePrinterActivity extends BaseActivity {
         ButterKnife.bind(this);
         getActivityComponent().inject(this);
 
+        getPrinter();
+
     }
+
+    private void getPrinter() {
+        if (dataManager.getPrinterIp().length() > 0 && dataManager.getPrinterName().length()>0){
+            etIpAddress.setText(dataManager.getPrinterIp());
+            etPrinterName.setText(dataManager.getPrinterName());
+        }
+    }
+
+
 }

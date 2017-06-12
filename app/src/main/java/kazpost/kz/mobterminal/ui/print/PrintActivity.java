@@ -1,6 +1,5 @@
 package kazpost.kz.mobterminal.ui.print;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +10,12 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
-import app.akexorcist.bluetotohspp.library.BluetoothState;
-import app.akexorcist.bluetotohspp.library.DeviceList;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -107,6 +105,7 @@ public class PrintActivity extends BaseActivity {
         getActivityComponent().inject(this);
 
 
+
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
         if (bundle != null) {
@@ -144,21 +143,32 @@ public class PrintActivity extends BaseActivity {
 
     private void sendToPrint() {
 
+        String weightKg = weightResponse;
+        String weightGr = "";
+
+        if (weightResponse!= null && weightResponse.contains(".")){
+            String[] weightStrArray = weightResponse.split("\\.");
+
+            weightKg = weightStrArray[0];
+            weightGr = weightStrArray[1] + "0";
+        }
+
+
         Retrofit retrofitRoutes = new Retrofit.Builder()
                 .baseUrl("http://192.168.204.85:8585")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .client(getUserClient("G3092323478923",
+//                .client(getUserClient("G1234567878923",
 //                        "Коктеубаева Айжан",
 //                        "239023",
-//                        "авиа",
+//                        "мешок \"Cактандыру\"",
 //                        "12:32:12",
 //                        "3",
-//                        "500",
+//                        "340",
 //                        "Алматы",
 //                        "Астана",
 //                        "Без акта",
-//                        "192.168.204.75",
-//                        "Honeywell"
+//                        dataManager.getPrinterIp(),
+//                        dataManager.getPrinterName()
 //                ))
 
                 .client(getUserClient(gNumber,
@@ -166,13 +176,13 @@ public class PrintActivity extends BaseActivity {
                         sealNumber,
                         bagType,
                         date2,
-                        weightResponse,
-                        "500",
+                        weightKg,
+                        weightGr,
                         fromDep,
                         toDep,
                         "Без акта",
-                        "192.168.204.75",
-                        "Honeywell"
+                        ipAddress,
+                        printerName
                 ))
                 .build();
 
@@ -200,6 +210,9 @@ public class PrintActivity extends BaseActivity {
 
                 if (ipAddress != null & printerName != null) {
                     sendToPrint();
+                }else{
+                    onErrorToast("Пропишите адрес и название принтера");
+                    startActivity(this, new ChoosePrinterActivity());
                 }
 
                 break;

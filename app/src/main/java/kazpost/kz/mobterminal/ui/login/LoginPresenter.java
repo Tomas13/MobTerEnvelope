@@ -44,29 +44,19 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         Long l = 0L;
         int fifteenMinInMs = 900000;
 
-
         SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
         try {
             Date date = formatter3.parse(lastLoginTime);
-
             Date currentDate = new Date();
-
-
             l = currentDate.getTime() - date.getTime();
 
             Log.d("LoginPresenter: ", " " + l);
 
-
         } catch (ParseException e) {
             Log.d("LoginPresenter: ", e.toString());
-
         }
 
-        if (!lastLoginTime.equals("no_login_time") && l < fifteenMinInMs) {
-            return true;
-        } else {
-            return false;
-        }
+        return !lastLoginTime.equals("no_login_time") && l < fifteenMinInMs;
 
     }
 
@@ -74,7 +64,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
     public void onLoginBtnClicked(String barcode, String pin) {
 
         getMvpView().showLoading();
-
 
         RequestEnvelope requestEnvelope = new RequestEnvelope();
         AuthRequestBody authRequestBody = new AuthRequestBody();
@@ -85,7 +74,6 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
 
         requestEnvelope.setAuthRequestBody(authRequestBody);
 
-
         Observable<Envelope> observable = getDataManager().doAuthorizeOnServer(requestEnvelope);
 
         observable
@@ -95,21 +83,18 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                         envelope -> {
                             Envelope.ResponseInfo responseInfo = envelope.getBody().getAuthorizeResponse().getResponseInfo();
 
-
                             if (responseInfo.getResponseCode().equals("0")) {
 
                                 String responseGenTime = responseInfo.getResponseGenTime();
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
                                 getDataManager().saveSessionId(sessioId);
-
                                 getDataManager().saveLastLoginTime(responseGenTime);
 
                                 getMvpView().openMainActivity();
 
                             } else {
                                 Log.d(TAG, "throwable " + responseInfo.getResponseText());
-
                                 getMvpView().onErrorToast(responseInfo.getResponseText());
                             }
 
@@ -121,9 +106,7 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                             getMvpView().onErrorToast(throwable.getMessage());
                             getMvpView().hideLoading();
                         });
-
     }
-
 
     private void showPin() {
         getMvpView().showPinEditText();

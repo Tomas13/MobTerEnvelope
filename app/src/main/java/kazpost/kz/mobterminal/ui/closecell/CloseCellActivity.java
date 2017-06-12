@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -54,15 +57,11 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
                 String bagBarcode = etCodeBag.getText().toString();
                 String sealNumber = etNumberSeal.getText().toString();
-
-                String wei = "weight";
-                if (etWeight.getText().length() != 0) {
-                    wei = etWeight.getText().toString();
-                }
+                String wei = etWeight.getText().toString();
 
                 if (checkEmptyFields(bagBarcode, sealNumber, wei)) {
                     presenter.closeBagRequest(bagBarcode, sealNumber, wei);
-                }else{
+                } else {
                     onErrorToast("Заполните все поля");
                 }
 
@@ -71,7 +70,19 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     }
 
     private boolean checkEmptyFields(String bagBarcode, String sealNumber, String wei) {
-        return bagBarcode.length() > 0 && sealNumber.length() > 0 && wei.length() > 0;
+
+        if (bagBarcode.length() > 0 && sealNumber.length() > 0 && wei.length() > 0){
+            Pattern mPatternBar = Pattern.compile("^\\d+(\\.\\d{0,2})?$");
+            Matcher matcher = mPatternBar.matcher(etWeight.getText());
+            if (matcher.find()) {
+                return true;
+            } else {
+                onErrorToast("Неверный формат веса");
+            }
+
+        }
+
+        return false;
     }
 
     @Override
