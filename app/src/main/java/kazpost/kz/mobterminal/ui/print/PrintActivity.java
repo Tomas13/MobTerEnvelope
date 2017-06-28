@@ -105,7 +105,6 @@ public class PrintActivity extends BaseActivity {
         getActivityComponent().inject(this);
 
 
-
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
         if (bundle != null) {
@@ -146,7 +145,7 @@ public class PrintActivity extends BaseActivity {
         String weightKg = weightResponse;
         String weightGr = "";
 
-        if (weightResponse!= null && weightResponse.contains(".")){
+        if (weightResponse != null && weightResponse.contains(".")) {
             String[] weightStrArray = weightResponse.split("\\.");
 
             weightKg = weightStrArray[0];
@@ -210,7 +209,7 @@ public class PrintActivity extends BaseActivity {
 
                 if (ipAddress != null & printerName != null) {
                     sendToPrint();
-                }else{
+                } else {
                     onErrorToast("Пропишите адрес и название принтера");
                     startActivity(this, new ChoosePrinterActivity());
                 }

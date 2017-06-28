@@ -24,7 +24,7 @@ public class Singleton {
                                              String fromdep,
                                              String todep,
                                              String deliverydoc, String printerip,
-                                             String printername){
+                                             String printername) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new StethoInterceptor()); //подключаю Stetho
         httpClient.readTimeout(60, TimeUnit.SECONDS);
@@ -33,7 +33,6 @@ public class Singleton {
             Request original = chain.request();
 
             Request request = original.newBuilder()
-//                    .header("Authorization", credentials) //добавляю хедер
                     .header("gnumber", URLEncoder.encode(gnumber, "UTF-8"))
                     .header("operatorname", URLEncoder.encode(operatorname, "UTF-8"))
                     .header("sealnumber", URLEncoder.encode(sealnumber, "UTF-8"))
@@ -56,7 +55,7 @@ public class Singleton {
     }
 
 
-    public static OkHttpClient getUserClient(){
+    public static OkHttpClient getUserClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new StethoInterceptor()); //подключаю Stetho
         httpClient.readTimeout(60, TimeUnit.SECONDS);
@@ -76,7 +75,6 @@ public class Singleton {
 
         return httpClient.build();
     }
-
 
 
 }

@@ -2,6 +2,7 @@ package kazpost.kz.mobterminal.ui.closecell;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
         getActivityComponent().inject(this);
         presenter.onAttach(CloseCellActivity.this);
+
     }
 
     @OnClick({R.id.btn_back_closecell, R.id.btn_next_closecell})
@@ -61,17 +63,17 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
                 if (checkEmptyFields(bagBarcode, sealNumber, wei)) {
                     presenter.closeBagRequest(bagBarcode, sealNumber, wei);
-                } else {
-                    onErrorToast("Заполните все поля");
+                } /*else {
+//                    onErrorToast("Заполните все поля");
                 }
-
+*/
                 break;
         }
     }
 
     private boolean checkEmptyFields(String bagBarcode, String sealNumber, String wei) {
 
-        if (bagBarcode.length() > 0 && sealNumber.length() > 0 && wei.length() > 0){
+        if (bagBarcode.length() > 0 && sealNumber.length() > 0 && wei.length() > 0) {
             Pattern mPatternBar = Pattern.compile("^\\d+(\\.\\d{0,2})?$");
             Matcher matcher = mPatternBar.matcher(etWeight.getText());
             if (matcher.find()) {
@@ -80,6 +82,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                 onErrorToast("Неверный формат веса");
             }
 
+        } else {
+            onErrorToast("Заполните все поля");
         }
 
         return false;
