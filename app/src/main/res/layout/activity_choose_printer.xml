@@ -10,33 +10,33 @@
 
 
     <TextView
-        android:id="@+id/tv_server"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@color/colorBlueLight"
         android:text="IP-адрес"
-        android:visibility="gone" />
+        android:id="@+id/tv_server"
+        android:layout_margin="10dp"/>
 
     <EditText
-        android:id="@+id/et_server_address"
+        android:visibility="gone"
+        android:layout_margin="5dp"
+        android:layout_below="@id/tv_server"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_server"
-        android:layout_margin="5dp"
         android:hint="ip-адрес сервера"
-        android:visibility="gone" />
+        android:id="@+id/et_server_address"/>
 
     <TextView
+        android:background="@color/colorBlueLight"
+        android:layout_below="@id/et_server_address"
         android:id="@+id/tv_scan_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_server_address"
         android:layout_margin="5dp"
-        android:background="@color/colorBlueLight"
+        android:textStyle="bold"
         android:text="@string/scanipname"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:id="@+id/ll_printer_info"
@@ -46,24 +46,16 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_printer_barcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Сканируйте адрес принтера" />
-
-        <EditText
             android:id="@+id/et_ip_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ip_address"
-            android:visibility="gone" />
+            android:hint="@string/ip_address" />
 
         <EditText
             android:id="@+id/et_printer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/printer_name"
-            android:visibility="gone" />
+            android:hint="@string/printer_name" />
 
     </LinearLayout>
 
