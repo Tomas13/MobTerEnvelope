@@ -23,21 +23,21 @@ public class ChoosePrinterActivity extends BaseActivity {
     EditText etIpAddress;
     @BindView(R.id.et_printer_name)
     EditText etPrinterName;
-//    @BindView(R.id.et_server_address)
-//    EditText etServerAddress;
+    @BindView(R.id.et_server_address)
+    EditText etServerAddress;
 
     @OnClick(R.id.btn_save_printer)
     public void savePrinter() {
 
-//        String serverIp = ;
+        String serverIp = etServerAddress.getText().toString();
         String printerName = etPrinterName.getText().toString();
         String printerIp = etIpAddress.getText().toString();
 
         if (printerName.length() > 0 && printerIp.length() > 0) {
-            dataManager.savePrinter(printerIp, printerName);
+            dataManager.savePrinter(serverIp, printerIp, printerName);
             startActivity(this, new MainActivity());
             this.finish();
-        }else{
+        } else {
             onErrorToast("Сканируйте ip-адрес и название");
         }
     }
@@ -55,8 +55,10 @@ public class ChoosePrinterActivity extends BaseActivity {
     }
 
     private void getPrinter() {
-        if(dataManager.getPrinterIp() != null && dataManager.getPrinterName() != null){
-            if (dataManager.getPrinterIp().length() > 0 && dataManager.getPrinterName().length()>0){
+        if (dataManager.getPrinterIp() != null && dataManager.getPrinterName() != null && dataManager.getServerIp() != null) {
+            if (dataManager.getPrinterIp().length() > 0 && dataManager.getPrinterName().length() > 0
+                    && dataManager.getServerIp().length() > 0) {
+                etServerAddress.setText(dataManager.getServerIp());
                 etIpAddress.setText(dataManager.getPrinterIp());
                 etPrinterName.setText(dataManager.getPrinterName());
             }

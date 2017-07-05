@@ -18,18 +18,11 @@
         android:id="@+id/tv_server"
         android:layout_margin="10dp"/>
 
-    <EditText
-        android:visibility="gone"
-        android:layout_margin="5dp"
-        android:layout_below="@id/tv_server"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ip-адрес сервера"
-        android:id="@+id/et_server_address"/>
+
 
     <TextView
         android:background="@color/colorBlueLight"
-        android:layout_below="@id/et_server_address"
+        android:layout_below="@id/tv_server"
         android:id="@+id/tv_scan_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_scan_ip"
         android:orientation="vertical">
+
+        <EditText
+            android:visibility="visible"
+            android:layout_below="@id/tv_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ip-адрес сервера"
+            android:id="@+id/et_server_address"/>
 
         <EditText
             android:id="@+id/et_ip_address"

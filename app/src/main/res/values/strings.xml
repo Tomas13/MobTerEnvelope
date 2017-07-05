@@ -14,7 +14,7 @@
     <string name="btnScannerSelectBarcode">Scanner Selection Example</string>
     <string name="btnSwitchScanners">Switch Scanners</string>
     <string name="txtBarcodeTitle">Press the device\'s scan button to scan a barcode.</string>
-    <string name="scan_package">Сканируйте ШПИ посылки</string>
+    <string name="scan_package">Сканируйте ШПИ РПО</string>
     <string name="your_code">ваш штрихкод</string>
     <string name="scan_bag">Сканируйте ШПИ мешка</string>
     <string name="enter_seal">Введите номер пломбы</string>
@@ -38,7 +38,7 @@
     <string name="to_dep_index">Индекс пункта назначения:</string>
     <string name="to_dep_name">Название пункта назначения:</string>
     <string name="pin_length">Пин-код должен состоять из 4-х символов</string>
-    <string name="ip_address">сканируйте ip-адрес</string>
+    <string name="ip_address">ip-адрес принтера</string>
     <string name="printer_name">Принтер</string>
-    <string name="scanipname">Для выбора принтера просканируйте ip-адрес и название принтера</string>
+    <string name="scanipname">Для выбора принтера введите ip-адрес и название принтера</string>
 </resources>

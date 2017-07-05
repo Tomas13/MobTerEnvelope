@@ -46,7 +46,6 @@ import static kazpost.kz.mobterminal.utils.AppConstants.WEIGHT_RESPONSE;
 
 public class PrintActivity extends BaseActivity {
 
-
     @Inject
     DataManager dataManager;
 
@@ -104,7 +103,6 @@ public class PrintActivity extends BaseActivity {
 
         getActivityComponent().inject(this);
 
-
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
         if (bundle != null) {
@@ -129,7 +127,6 @@ public class PrintActivity extends BaseActivity {
                 Log.d("PrintActivity: ", e.toString());
             }
 
-
             tvGNumber.setText(gNumberTitle + " " + gNumber);
             tvSealNumber.setText(sealNumberTitle + " " + sealNumber);
             tvWeight.setText(weightTitle + " " + weightResponse);
@@ -152,9 +149,12 @@ public class PrintActivity extends BaseActivity {
             weightGr = weightStrArray[1] + "0";
         }
 
+        String url = "http://" + dataManager.getServerIp() + ":8585";
+
 
         Retrofit retrofitRoutes = new Retrofit.Builder()
-                .baseUrl("http://192.168.204.85:8585")
+//                .baseUrl("http://192.168.204.85:8585")
+                .baseUrl(url)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 //                .client(getUserClient("G1234567878923",
 //                        "Коктеубаева Айжан",

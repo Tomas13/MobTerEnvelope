@@ -79,9 +79,10 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void savePrinter(String ipAddress, String printerName) {
-        mPreferencesHelper.savePrinter(ipAddress, printerName);
+    public void savePrinter(String serverIp, String ipAddress, String printerName) {
+        mPreferencesHelper.savePrinter(serverIp, ipAddress, printerName);
     }
+
 
     @Override
     public String getPrinterIp() {
@@ -101,5 +102,10 @@ public class AppDataManager implements DataManager {
     @Override
     public String getLastLoginTime() {
         return mPreferencesHelper.getLastLoginTime();
+    }
+
+    @Override
+    public String getServerIp() {
+        return mPreferencesHelper.getServerIp();
     }
 }
