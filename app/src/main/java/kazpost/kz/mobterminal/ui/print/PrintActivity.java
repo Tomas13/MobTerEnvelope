@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -192,8 +193,18 @@ public class PrintActivity extends BaseActivity {
 
         sendPrint.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(responseBody -> Log.d("PrintA", responseBody.toString()),
-                        throwable -> Log.d("PrintAT", throwable.getMessage()));
+                .subscribe(responseBody -> {
+                            try {
+                                showPrintSuccessOrFailureDialog(responseBody.string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d("PrintA", responseBody.toString());
+                        },
+                        throwable -> {
+                            showPrintSuccessOrFailureDialog(throwable.getMessage());
+                            Log.d("PrintAT", throwable.getMessage());
+                        });
     }
 
     @OnClick({R.id.btn_go_main, R.id.btn_repeat_print})
@@ -239,5 +250,21 @@ public class PrintActivity extends BaseActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
+    private void showPrintSuccessOrFailureDialog(String msg) {
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(msg);
+
+        builder.setNegativeButton("Ok", ((dialog, which) -> dialog.dismiss()));
+
+        // 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 }
