@@ -151,11 +151,10 @@ public class PrintActivity extends BaseActivity {
 
         String url = "http://" + dataManager.getServerIp() + ":8585";
 
-
         Retrofit retrofitRoutes = new Retrofit.Builder()
 //                .baseUrl("http://192.168.204.85:8585")
                 .baseUrl(url)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 //                .client(getUserClient("G1234567878923",
 //                        "Коктеубаева Айжан",
 //                        "239023",

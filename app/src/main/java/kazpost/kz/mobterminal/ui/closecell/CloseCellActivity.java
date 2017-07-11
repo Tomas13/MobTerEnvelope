@@ -1,7 +1,9 @@
 package kazpost.kz.mobterminal.ui.closecell;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -53,7 +55,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back_closecell:
-                super.onBackPressed();
+                showDialog();
+//                super.onBackPressed();
                 break;
             case R.id.btn_next_closecell:
 
@@ -101,6 +104,29 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     @Override
     public void startLoginActivity() {
         startLoginActivity(this);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        showDialog();
+//        super.onBackPressed();
+    }
+
+    private void showDialog() {
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(R.string.dialog_exit_message);
+        //                .setTitle(R.string.dialog_title);
+
+        builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
+        builder.setNegativeButton("Нет", ((dialog, which) -> dialog.dismiss()));
+
+        // 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

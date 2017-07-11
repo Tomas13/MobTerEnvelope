@@ -7,8 +7,8 @@
     <string name="enter_your_pin">Введите свой Pin-код: </string>
     <string name="login">Логин</string>
     <string name="enter">войти</string>
-    <string name="sort">сортировать</string>
-    <string name="close_cell">закрыть ячейку</string>
+    <string name="sort">сортировка</string>
+    <string name="close_cell">закрытие ячейки</string>
     <string name="config_printer">Настройка принтера</string>
 
     <string name="btnScannerSelectBarcode">Scanner Selection Example</string>
@@ -41,4 +41,5 @@
     <string name="ip_address">ip-адрес принтера</string>
     <string name="printer_name">Принтер</string>
     <string name="scanipname">Для выбора принтера введите ip-адрес и название принтера</string>
+    <string name="dialog_exit_message">Вы действительно хотите выйти?</string>
 </resources>
