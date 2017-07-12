@@ -42,4 +42,6 @@
     <string name="printer_name">Принтер</string>
     <string name="scanipname">Для выбора принтера введите ip-адрес и название принтера</string>
     <string name="dialog_exit_message">Вы действительно хотите выйти?</string>
+    <string name="bag_is_closed">Мешок закрыт</string>
+    <string name="wrong_g">Неверный номер G-накладной</string>
 </resources>

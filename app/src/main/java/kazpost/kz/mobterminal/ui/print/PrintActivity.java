@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -21,6 +22,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.data.network.NetworkService;
@@ -49,6 +51,11 @@ public class PrintActivity extends BaseActivity {
 
     @Inject
     DataManager dataManager;
+
+    @BindString(R.string.bag_is_closed)
+    String bagIsClosed;
+    @BindString(R.string.wrong_g)
+    String wrongG;
 
     @BindView(R.id.tv_g_number)
     TextView tvGNumber;
@@ -137,6 +144,17 @@ public class PrintActivity extends BaseActivity {
             tvOperatorName.setText(operatorTitle + " " + operatorName);
         }
     }
+
+    @OnTextChanged(R.id.et_code_g)
+    public void etCode() {
+        String enteredG = etCodeG.getText().toString();
+        if (enteredG.equals(gNumber)) {
+            onErrorToast(bagIsClosed);
+        } else {
+            onErrorToast(wrongG);
+        }
+    }
+
 
     private void sendToPrint() {
 
