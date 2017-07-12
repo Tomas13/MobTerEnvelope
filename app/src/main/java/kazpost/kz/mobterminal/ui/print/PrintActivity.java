@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -156,34 +155,34 @@ public class PrintActivity extends BaseActivity {
         Retrofit retrofitRoutes = new Retrofit.Builder()
 //                .baseUrl("http://192.168.204.85:8585")
                 .baseUrl(url)
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .client(getUserClient("G1234567878923",
-//                        "Коктеубаева Айжан",
-//                        "239023",
-//                        "мешок \"Cактандыру\"",
-//                        "12:32:12",
-//                        "3",
-//                        "340",
-//                        "Алматы",
-//                        "Астана",
-//                        "Без акта",
-//                        dataManager.getPrinterIp(),
-//                        dataManager.getPrinterName()
-//                ))
-
-                .client(getUserClient(gNumber,
-                        operatorName,
-                        sealNumber,
-                        bagType,
-                        date2,
-                        weightKg,
-                        weightGr,
-                        fromDep,
-                        toDep,
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(getUserClient("G1234567878923",
+                        "Коктеубаева Айжан",
+                        "239023",
+                        "мешок \"Cактандыру\"",
+                        "12:32:12",
+                        "3",
+                        "340",
+                        "Алматы",
+                        "Астана",
                         "Без акта",
-                        ipAddress,
-                        printerName
+                        dataManager.getPrinterIp(),
+                        dataManager.getPrinterName()
                 ))
+//
+//                .client(getUserClient(gNumber,
+//                        operatorName,
+//                        sealNumber,
+//                        bagType,
+//                        date2,
+//                        weightKg,
+//                        weightGr,
+//                        fromDep,
+//                        toDep,
+//                        "Без акта",
+//                        ipAddress,
+//                        printerName
+//                ))
                 .build();
 
 
@@ -212,6 +211,7 @@ public class PrintActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_go_main:
                 startActivity(this, new MainActivity());
+                finish();
                 break;
             case R.id.btn_repeat_print:
 
