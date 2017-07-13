@@ -81,7 +81,8 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
                                     break;
 
                                 case "301"://Б накладная не создана
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
+//                                    getMvpView().onErrorToast(text);
                                     break;
 
                                 case "103": //User not authorized
@@ -95,11 +96,13 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
                                     break;
 
                                 case "300": //bag not found
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
+//                                    getMvpView().onErrorToast(text);
                                     break;
 
                                 default:
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
+//                                    getMvpView().onErrorToast(text);
                                     break;
                             }
 
@@ -107,7 +110,9 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
                             getMvpView().hideLoading();
                         },
                         throwable -> {
-                            getMvpView().onErrorToast(throwable.getMessage());
+                            getMvpView().showMistakeDialog(throwable.getMessage());
+
+//                            getMvpView().onErrorToast(throwable.getMessage());
                             getMvpView().hideLoading();
                         });
 

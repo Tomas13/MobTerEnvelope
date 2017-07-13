@@ -153,8 +153,9 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     getMvpView().onErrorToast(text);
                                     getMvpView().startLoginActivity();
                                     break;
-                                case "300": //User not authorized
-                                    getMvpView().onErrorToast(text);
+                                case "300": //Мешок не найден
+                                    getMvpView().showMistakeDialog(text);
+//                                    getMvpView().onErrorToast(text);
                                     getMvpView().clearBagEditText();
                                     break;
 

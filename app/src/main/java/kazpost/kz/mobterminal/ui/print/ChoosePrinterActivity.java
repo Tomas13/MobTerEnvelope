@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.print;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -76,10 +77,17 @@ public class ChoosePrinterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_save_printer:
                 onSavePrinterBtn();
+                onErrorToast("Сохранено");
+                hideKeyboard();
                 break;
             case R.id.btn_back_choose_printer:
-                this.finish();
-                startActivity(this, new MainActivity());
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+//                this.finish();
+//                startActivity(this, new MainActivity());
                 break;
             case R.id.btn_test_print:
 

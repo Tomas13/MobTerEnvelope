@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        makeHighSound(getApplicationContext());
 
         tvVersionName.append(BuildConfig.VERSION_NAME);
 

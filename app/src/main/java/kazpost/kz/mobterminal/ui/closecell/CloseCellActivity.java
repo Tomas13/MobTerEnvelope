@@ -106,6 +106,11 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
         startLoginActivity(this);
     }
 
+    @Override
+    public void showMistakeDialog(String msg) {
+        showErrorDialog(msg);
+    }
+
 
     @Override
     public void onBackPressed() {

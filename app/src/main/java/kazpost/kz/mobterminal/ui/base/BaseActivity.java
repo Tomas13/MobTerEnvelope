@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -17,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -209,5 +214,42 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         // 3. Get the AlertDialog from create()
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+
+
+    public void makeHighSound(Context ctx) {
+        //it'll increase volume up to 90 under any circumstances
+        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+//        int currentVolume = 60;
+        int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        float percent = 0.5f;
+        int seventyVolume = (int) (maxVolume*percent);
+        audio.setStreamVolume(AudioManager.STREAM_MUSIC, seventyVolume, 0);
+
+        AssetManager am;
+        try {
+            am = ctx.getAssets();
+            AssetFileDescriptor afd = am.openFd("you_got_it.wav");
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
+                    afd.getLength());
+            player.prepare();
+            player.start();
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // TODO Auto-generated method stub
+                    mp.release();
+                }
+
+            });
+            player.setLooping(false);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
