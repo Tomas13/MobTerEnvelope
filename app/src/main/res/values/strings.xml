@@ -44,4 +44,5 @@
     <string name="dialog_exit_message">Вы действительно хотите выйти?</string>
     <string name="bag_is_closed">Мешок закрыт</string>
     <string name="wrong_g">Неверный номер G-накладной</string>
+    <string name="go_to_main">В главное меню</string>
 </resources>

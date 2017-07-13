@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.print;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -228,8 +229,10 @@ public class PrintActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_go_main:
-                startActivity(this, new MainActivity());
-                finish();
+
+                showGoToMainDialog();
+//                startActivity(this, new MainActivity());
+//                finish();
                 break;
             case R.id.btn_repeat_print:
 
@@ -247,6 +250,13 @@ public class PrintActivity extends BaseActivity {
         }
     }
 
+    private void goToMain(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+    }
+
     @Override
     public void onBackPressed() {
         showDialog();
@@ -260,8 +270,24 @@ public class PrintActivity extends BaseActivity {
         // 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage(R.string.dialog_exit_message);
         //                .setTitle(R.string.dialog_title);
-
+        builder.setCancelable(false);
         builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
+        builder.setNegativeButton("Нет", ((dialog, which) -> dialog.dismiss()));
+
+        // 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showGoToMainDialog() {
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(R.string.dialog_exit_message);
+        //                .setTitle(R.string.dialog_title);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Да", (dialog, which) -> goToMain());
         builder.setNegativeButton("Нет", ((dialog, which) -> dialog.dismiss()));
 
         // 3. Get the AlertDialog from create()

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -193,4 +194,20 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         return mActivityComponent;
     }
 
+
+    public void showErrorDialog(String message) {
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(message);
+
+        builder.setCancelable(false);
+//        builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
+        builder.setNegativeButton("OK", ((dialog, which) -> dialog.dismiss()));
+
+        // 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

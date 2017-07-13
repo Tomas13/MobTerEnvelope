@@ -1,8 +1,10 @@
 package kazpost.kz.mobterminal.ui.scan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,9 +14,12 @@ import javax.inject.Inject;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
+import kazpost.kz.mobterminal.ui.main.MainActivity;
 
 public class ScanActivity extends BaseActivity implements ScanMvpView {
 
@@ -45,6 +50,10 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     @BindString(R.string.scan_package)
     String scanPackage;
     String mBagBarcode;
+    @BindView(R.id.btn_scan_go_to_main)
+    Button btnScanGoToMain;
+    @BindView(R.id.btn_scan_go_to_close)
+    Button btnScanGoToClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +79,7 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     }
 
     @Override
-    public void clearBagEditText(){
+    public void clearBagEditText() {
         etScanBagActivity.setText("");
     }
 
@@ -125,4 +134,24 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
         super.onDestroy();
     }
 
+    @Override
+    public void showMistakeDialog(String msg) {
+        showErrorDialog(msg);
+    }
+
+    @OnClick({R.id.btn_scan_go_to_main, R.id.btn_scan_go_to_close})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_scan_go_to_main:
+//                this.finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+            case R.id.btn_scan_go_to_close:
+                finish();
+                startActivity(this, new CloseCellActivity());
+                break;
+        }
+    }
 }

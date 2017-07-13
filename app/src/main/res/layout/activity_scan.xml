@@ -111,24 +111,48 @@
         android:visibility="gone" />
 
     <EditText
-        android:imeOptions="flagNoFullscreen"
         android:id="@+id/et_scan_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_scan_bag"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
+        android:imeOptions="flagNoFullscreen"
         android:visibility="visible" />
 
     <EditText
         android:id="@+id/et_scan_bag_activity"
-        android:imeOptions="flagNoFullscreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_scan_activity"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
+        android:imeOptions="flagNoFullscreen"
         android:visibility="gone" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_scan_go_to_main"
+            style="@style/BlueButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/go_to_main" />
+
+        <Button
+            android:id="@+id/btn_scan_go_to_close"
+            style="@style/BlueButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/close_cell" />
+    </LinearLayout>
 
 </RelativeLayout>

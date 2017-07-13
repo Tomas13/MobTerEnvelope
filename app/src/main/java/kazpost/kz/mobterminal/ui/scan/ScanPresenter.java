@@ -82,6 +82,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     getMvpView().clearBagEditText();
                                     break;
 
+                                case "MD-07001":    //ШПИ не найден
+                                    getMvpView().showMistakeDialog(text);
+                                    getMvpView().readyForNextScan();
+                                    break;
 
                                 default:
                                     Log.d(TAG, "default " + responseInfo.getResponseText());
@@ -97,7 +101,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                         throwable -> {
                             Log.d(TAG, "throwable " + throwable.getMessage());
 
-                            getMvpView().onErrorToast(throwable.getMessage());
+                            getMvpView().showMistakeDialog(throwable.getMessage());
                             getMvpView().hideLoading();
 
                         });
@@ -137,9 +141,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                                     //success
                                     getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
-
                                     getMvpView().readyForNextScan();
-
                                     break;
 
                                 case "103": //User not authorized
@@ -158,9 +160,9 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                                 case "6":
                                     //ШПИ уже добавлен в другой документ
-                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+                                    getMvpView().showMistakeDialog(text);
+//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
                                     getMvpView().readyForNextScan();
-
                                     break;
 
                                 default:
@@ -170,13 +172,9 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                             getMvpView().hideLoading();
 
                         },
-
-
                         throwable -> {
-
-                            getMvpView().onErrorToast(throwable.getMessage());
+                            getMvpView().showMistakeDialog(throwable.getMessage());
                             getMvpView().hideLoading();
-
                         });
     }
 

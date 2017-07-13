@@ -17,4 +17,6 @@ public interface ScanMvpView extends MvpView {
 
     void startLoginActivity();
 
+    void showMistakeDialog(String msg);
+
 }

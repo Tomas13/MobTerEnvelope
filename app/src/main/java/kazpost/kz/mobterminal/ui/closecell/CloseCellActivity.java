@@ -121,6 +121,7 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
         builder.setMessage(R.string.dialog_exit_message);
         //                .setTitle(R.string.dialog_title);
 
+        builder.setCancelable(false);
         builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
         builder.setNegativeButton("Нет", ((dialog, which) -> dialog.dismiss()));
 
