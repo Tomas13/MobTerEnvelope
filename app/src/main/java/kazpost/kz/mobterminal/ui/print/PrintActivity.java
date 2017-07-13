@@ -209,10 +209,12 @@ public class PrintActivity extends BaseActivity {
 
         Observable<ResponseBody> sendPrint = gitHubServ.sendToPrint();
 
+        showLoading();
         sendPrint.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
                             try {
+                                hideLoading();
                                 showPrintSuccessOrFailureDialog(responseBody.string());
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -220,6 +222,7 @@ public class PrintActivity extends BaseActivity {
                             Log.d("PrintA", responseBody.toString());
                         },
                         throwable -> {
+                            hideLoading();
                             showPrintSuccessOrFailureDialog(throwable.getMessage());
                             Log.d("PrintAT", throwable.getMessage());
                         });
@@ -250,7 +253,7 @@ public class PrintActivity extends BaseActivity {
         }
     }
 
-    private void goToMain(){
+    private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -302,7 +305,7 @@ public class PrintActivity extends BaseActivity {
 
         // 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage(msg);
-
+        builder.setCancelable(false);
         builder.setNegativeButton("Ok", ((dialog, which) -> dialog.dismiss()));
 
         // 3. Get the AlertDialog from create()
