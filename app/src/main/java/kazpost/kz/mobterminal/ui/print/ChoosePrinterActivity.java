@@ -149,15 +149,13 @@ public class ChoosePrinterActivity extends BaseActivity {
         sendPrint.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
-                            try {
-                                hideLoading();
-                                showPrintSuccessOrFailureDialog(responseBody.string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            hideLoading();
+                            showPrintSuccessOrFailureDialog("Печать успешна");
                             Log.d("PrintA", responseBody.toString());
                         },
-                        throwable -> {
+                        throwable ->
+
+                        {
                             hideLoading();
                             showErrorDialog(throwable.getMessage());
 //                            showPrintSuccessOrFailureDialog(throwable.getMessage());

@@ -175,33 +175,33 @@ public class PrintActivity extends BaseActivity {
 //                .baseUrl("http://192.168.204.85:8585")
                 .baseUrl(url)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(getUserClient("G1234567878923",
-                        "Коктеубаева Айжан",
-                        "239023",
-                        "мешок \"Cактандыру\"",
-                        "12:32:12",
-                        "3",
-                        "340",
-                        "Алматы",
-                        "Астана",
-                        "Без акта",
-                        dataManager.getPrinterIp(),
-                        dataManager.getPrinterName()
-                ))
-//
-//                .client(getUserClient(gNumber,
-//                        operatorName,
-//                        sealNumber,
-//                        bagType,
-//                        date2,
-//                        weightKg,
-//                        weightGr,
-//                        fromDep,
-//                        toDep,
+//                .client(getUserClient("G1234567878923",
+//                        "Коктеубаева Айжан",
+//                        "239023",
+//                        "мешок \"Cактандыру\"",
+//                        "12:32:12",
+//                        "3",
+//                        "340",
+//                        "Алматы",
+//                        "Астана",
 //                        "Без акта",
-//                        ipAddress,
-//                        printerName
+//                        dataManager.getPrinterIp(),
+//                        dataManager.getPrinterName()
 //                ))
+
+                .client(getUserClient(gNumber,
+                        operatorName,
+                        sealNumber,
+                        bagType,
+                        date2,
+                        weightKg,
+                        weightGr,
+                        fromDep,
+                        toDep,
+                        "Без акта",
+                        ipAddress,
+                        printerName
+                ))
                 .build();
 
 
@@ -213,12 +213,9 @@ public class PrintActivity extends BaseActivity {
         sendPrint.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
-                            try {
-                                hideLoading();
-                                showPrintSuccessOrFailureDialog(responseBody.string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            hideLoading();
+//                            onErrorToast("Печать успешна");
+                            showPrintSuccessOrFailureDialog("Печать успешна");
                             Log.d("PrintA", responseBody.toString());
                         },
                         throwable -> {
@@ -312,6 +309,5 @@ public class PrintActivity extends BaseActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 }
