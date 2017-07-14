@@ -86,12 +86,12 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
                                     break;
 
                                 case "103": //User not authorized
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
 
                                 case "106": //Session expired
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
 

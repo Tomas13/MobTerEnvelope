@@ -69,16 +69,16 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     break;
 
                                 case "103": //User not authorized
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
 
                                 case "106": //Session expired
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
                                 case "300": //User not authorized
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().clearBagEditText();
                                     break;
 
@@ -90,7 +90,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                 default:
                                     Log.d(TAG, "default " + responseInfo.getResponseText());
 
-                                    getMvpView().onErrorToast(responseInfo.getResponseText());
+                                    getMvpView().showMistakeDialog(responseInfo.getResponseText());
                                     getMvpView().readyForNextScan();
 
                                     break;
@@ -145,12 +145,12 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     break;
 
                                 case "103": //User not authorized
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
 
                                 case "106": //Session expired
-                                    getMvpView().onErrorToast(text);
+                                    getMvpView().showMistakeDialog(text);
                                     getMvpView().startLoginActivity();
                                     break;
                                 case "300": //Мешок не найден

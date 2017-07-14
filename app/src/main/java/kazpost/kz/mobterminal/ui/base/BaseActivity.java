@@ -207,6 +207,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         // 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage(message);
 
+        makeHighSound(getApplicationContext());
+
         builder.setCancelable(false);
 //        builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
         builder.setNegativeButton("OK", ((dialog, which) -> dialog.dismiss()));
@@ -224,17 +226,17 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 //                int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
 //        int currentVolume = 60;
         int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        float percent = 0.5f;
+        float percent = 0.6f;
         int seventyVolume = (int) (maxVolume*percent);
         audio.setStreamVolume(AudioManager.STREAM_MUSIC, seventyVolume, 0);
 
         AssetManager am;
         try {
             am = ctx.getAssets();
-            AssetFileDescriptor afd = am.openFd("you_got_it.wav");
+            AssetFileDescriptor afd = am.openFd("burglar.wav");
             MediaPlayer player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
-                    afd.getLength());
+                    afd.getLength() / 4);
             player.prepare();
             player.start();
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

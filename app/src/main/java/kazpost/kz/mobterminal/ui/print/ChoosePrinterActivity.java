@@ -159,7 +159,8 @@ public class ChoosePrinterActivity extends BaseActivity {
                         },
                         throwable -> {
                             hideLoading();
-                            showPrintSuccessOrFailureDialog(throwable.getMessage());
+                            showErrorDialog(throwable.getMessage());
+//                            showPrintSuccessOrFailureDialog(throwable.getMessage());
                             Log.d("PrintAT", throwable.getMessage());
                         });
     }
