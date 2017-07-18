@@ -1,6 +1,7 @@
 package kazpost.kz.mobterminal.ui.print;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -111,6 +112,8 @@ public class ChoosePrinterActivity extends BaseActivity {
         String printerIp = etIpAddress.getText().toString();
 
         if (printerName.length() > 0 && printerIp.length() > 0) {
+
+
             dataManager.savePrinter(serverIp, printerIp, printerName);
 
         } else {
