@@ -79,6 +79,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void removeLastLoginTime() {
+        mPreferencesHelper.removeLastLoginTime();
+    }
+
+    @Override
     public void savePrinter(String serverIp, String ipAddress, String printerName) {
         mPreferencesHelper.savePrinter(serverIp, ipAddress, printerName);
     }

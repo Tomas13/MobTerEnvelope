@@ -10,6 +10,8 @@ public interface PreferencesHelper {
 
     void saveLastLoginTime(String dateTime);
 
+    void removeLastLoginTime();
+
     void savePrinter(String serverIp, String ipAddress, String printerName);
 
     String getPrinterIp();

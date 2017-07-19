@@ -31,4 +31,6 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
     void onConfigPrinterBtnClicked();
 
     void onCloseCellBtnClicked();
+
+    void onExit();
 }

@@ -83,6 +83,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                 mPresenter.onConfigPrinterBtnClicked();
                 break;
             case R.id.btn_exit:
+                mPresenter.onExit();
                 finish();
                 break;
         }

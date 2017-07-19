@@ -42,6 +42,11 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
+    public void removeLastLoginTime() {
+        mPrefs.edit().remove(PREF_KEY_DATE_TIME).apply();
+    }
+
+    @Override
     public void savePrinter(String serverIp, String ipAddress, String printerName) {
 
         mPrefs.edit().putString(PREF_KEY_SERVER_IP, serverIp).apply();
