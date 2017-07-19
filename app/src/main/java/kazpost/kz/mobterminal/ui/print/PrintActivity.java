@@ -114,8 +114,9 @@ public class PrintActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getBundleExtra(PRINT_ACTIVITY);
 
+//        gNumber = "G20170227105800325";
         if (bundle != null) {
-            gNumber = bundle.getString(G_NUMBER, "G000000000");
+            gNumber = bundle.getString(G_NUMBER, "G123456789");
             sealNumber = bundle.getString(SEAL_NUMBER, "00000");
             weightResponse = bundle.getString(WEIGHT_RESPONSE, "0");
             fromDep = bundle.getString(FROM_DEP, "fromDep");
@@ -149,10 +150,13 @@ public class PrintActivity extends BaseActivity {
     @OnTextChanged(R.id.et_code_g)
     public void etCode() {
         String enteredG = etCodeG.getText().toString();
-        if (enteredG.equals(gNumber)) {
-            onErrorToast(bagIsClosed);
-        } else {
-            onErrorToast(wrongG);
+
+        if (enteredG.length() == 18) {
+            if (enteredG.equals(gNumber)) {
+                showErrorDialog(bagIsClosed);
+            } else {
+                showErrorDialog(wrongG);
+            }
         }
     }
 
@@ -172,10 +176,9 @@ public class PrintActivity extends BaseActivity {
         String url = "http://" + dataManager.getServerIp() + ":8585";
 
         Retrofit retrofitRoutes = new Retrofit.Builder()
-//                .baseUrl("http://192.168.204.85:8585")
                 .baseUrl(url)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .client(getUserClient("G1234567878923",
+//                .client(getUserClient(gNumber,
 //                        "Коктеубаева Айжан",
 //                        "239023",
 //                        "мешок \"Cактандыру\"",
