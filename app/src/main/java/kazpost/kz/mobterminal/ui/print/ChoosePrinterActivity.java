@@ -111,7 +111,7 @@ public class ChoosePrinterActivity extends BaseActivity {
         String printerName = etPrinterName.getText().toString();
         String printerIp = etIpAddress.getText().toString();
 
-        if (printerName.length() > 0 && printerIp.length() > 0) {
+        if (printerName.length() > 0 && printerIp.length() > 0 && serverIp.length() > 0) {
 
 
             dataManager.savePrinter(serverIp, printerIp, printerName);

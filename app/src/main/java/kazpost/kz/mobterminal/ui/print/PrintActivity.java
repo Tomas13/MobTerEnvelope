@@ -178,7 +178,7 @@ public class PrintActivity extends BaseActivity {
         Retrofit retrofitRoutes = new Retrofit.Builder()
                 .baseUrl(url)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .client(getUserClient(gNumber,
+//                .client(getUserClient("G201745",
 //                        "Коктеубаева Айжан",
 //                        "239023",
 //                        "мешок \"Cактандыру\"",
@@ -218,12 +218,13 @@ public class PrintActivity extends BaseActivity {
                 .subscribe(responseBody -> {
                             hideLoading();
 //                            onErrorToast("Печать успешна");
-                            showPrintSuccessOrFailureDialog("Печать успешна");
+
+                            showErrorDialog("Печать успешна");
                             Log.d("PrintA", responseBody.toString());
                         },
                         throwable -> {
                             hideLoading();
-                            showPrintSuccessOrFailureDialog(throwable.getMessage());
+                            showErrorDialog(throwable.getMessage());
                             Log.d("PrintAT", throwable.getMessage());
                         });
     }
