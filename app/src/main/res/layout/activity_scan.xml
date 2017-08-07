@@ -14,7 +14,7 @@
         android:gravity="center_horizontal"
         android:text="@string/scan_package"
         android:textColor="@color/black_effective"
-        android:textSize="16dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textSize="18sp"
         android:layout_toRightOf="@id/tv_scan_top"
         android:text="QS270000161KZ"
         android:textColor="@color/colorBlue"
@@ -79,6 +80,7 @@
                 android:layout_weight="2"
                 android:background="@color/colorBlueLight"
                 android:padding="5dp"
+                android:textSize="18sp"
                 android:text="M84"
                 android:textColor="@color/black_effective" />
 
@@ -90,6 +92,7 @@
                 android:layout_weight="1"
                 android:background="@color/pink"
                 android:padding="5dp"
+                android:textSize="18sp"
                 android:text="M84"
                 android:textColor="@color/black_effective"
                 android:textStyle="bold" />
@@ -115,6 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_scan_bag"
+        android:textSize="28sp"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
         android:imeOptions="flagNoFullscreen"
@@ -125,6 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_scan_activity"
+        android:textSize="28sp"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
         android:imeOptions="flagNoFullscreen"
