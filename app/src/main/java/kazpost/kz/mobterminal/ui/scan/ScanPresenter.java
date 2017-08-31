@@ -135,12 +135,19 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
                             String responseCode = envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseCode();
                             String text = envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText();
+                            String bagWeight = envelope.getBody().getParcelToBagResponse().getResponseInfo().getBagWeight();
+                            String quantity = envelope.getBody().getParcelToBagResponse().getResponseInfo().getMailQuantity();
 
                             switch (responseCode) {
                                 case "0":
 
                                     //success
-                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
+                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText()
+
+                                    + "    Вес: " + bagWeight + "  Кол-во: " + quantity);
+//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getBagWeight());
+//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getMailQuantity());
+
                                     getMvpView().readyForNextScan();
                                     break;
 

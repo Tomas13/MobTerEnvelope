@@ -39,7 +39,7 @@ public class Envelope {
         @Element(name = "ResponseGenTime", required = false)
         String responseGenTime;
 
-/*
+
 
         @Element(name = "mlcntq", required = false) //количество рпо
                 String mailQuantity;
@@ -62,7 +62,7 @@ public class Envelope {
         public void setBagWeight(String bagWeight) {
             this.bagWeight = bagWeight;
         }
-*/
+
 
         public String getResponseCode() {
             return this.responseCode;
