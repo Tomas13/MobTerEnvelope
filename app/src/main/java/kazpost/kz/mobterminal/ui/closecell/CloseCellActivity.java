@@ -1,14 +1,11 @@
 package kazpost.kz.mobterminal.ui.closecell;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,8 +72,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     }
 
     private boolean checkWeight(String wei) {
-        if (Double.parseDouble(wei) > 20) {
-            showMistakeDialog("Вес не может превышать 20 кг");
+        if (Double.parseDouble(wei) > 14.5) {
+            showMistakeDialog("Вес не может превышать 14.5 кг");
             return false;
         } else {
             return true;

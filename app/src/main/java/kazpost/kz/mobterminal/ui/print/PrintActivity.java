@@ -9,9 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -151,7 +149,7 @@ public class PrintActivity extends BaseActivity {
     public void etCode() {
         String enteredG = etCodeG.getText().toString();
 
-        if (enteredG.length() == 18) {
+        if (enteredG.length() > 15) {
             if (enteredG.equals(gNumber)) {
                 showErrorDialog(bagIsClosed);
             } else {
