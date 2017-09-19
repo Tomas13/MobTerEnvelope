@@ -1,5 +1,6 @@
 package kazpost.kz.mobterminal.ui.login;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
+import kazpost.kz.mobterminal.BuildConfig;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
@@ -37,6 +38,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     String userBarcode, userPin;
     @BindView(R.id.btn_barcode)
     Button btnBarcode;
+    @BindView(R.id.tv_version_name_login)
+    TextView tvVersionNameLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,9 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         mPresenter.onAttach(LoginActivity.this);
 
-        if (mPresenter.isLoggedIn()){
+        tvVersionNameLogin.append(BuildConfig.VERSION_NAME);
+
+        if (mPresenter.isLoggedIn()) {
             openMainActivity();
             finish();
         }
@@ -73,7 +78,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         if (userPin.length() == 4) {
             mPresenter.onLoginBtnClicked(userBarcode, userPin);
-        }else{
+        } else {
             onErrorToast(getString(R.string.pin_length));
         }
 

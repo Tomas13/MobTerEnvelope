@@ -8,8 +8,8 @@ android {
         applicationId "kazpost.kz.mobterminal"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 10
-        versionName "1.10"
+        versionCode 12
+        versionName "Боевой 12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
