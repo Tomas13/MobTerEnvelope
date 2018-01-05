@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/ll1_main"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
         <Button
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:text="@string/sort" />
+            android:text="@string/sort_saktandiry" />
 
         <Button
             android:id="@+id/btn_close_cell"
@@ -33,9 +33,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:id="@+id/ll2_main"
         android:layout_below="@id/ll1_main"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_sort_open_bag"
+            style="@style/BlueButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="@string/sort_open_bag" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/ll2_main"
         android:orientation="horizontal">
 
         <Button
@@ -65,7 +83,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

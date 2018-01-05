@@ -20,6 +20,7 @@ import dagger.Component;
 import dagger.Subcomponent;
 import kazpost.kz.mobterminal.di.PerActivity;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
+import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
@@ -46,4 +47,5 @@ public interface ActivityComponent {
     void inject(PrintActivity activity);
     void inject(ChoosePrinterActivity activity);
 
+    void inject(BaseActivity activity);
 }

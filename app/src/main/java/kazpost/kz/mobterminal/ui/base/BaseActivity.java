@@ -9,12 +9,15 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +26,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.inject.Inject;
+
 import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.R;
+import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.di.component.ActivityComponent;
 import kazpost.kz.mobterminal.di.component.ConfigPersistentComponent;
 import kazpost.kz.mobterminal.di.component.DaggerActivityComponent;
@@ -36,6 +46,8 @@ import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
 import kazpost.kz.mobterminal.utils.CommonUtils;
 import kazpost.kz.mobterminal.utils.NetworkUtils;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by root on 4/11/17.
@@ -52,9 +64,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
     private long mActivityId;
 
+    @Inject
+    DataManager dataManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
@@ -79,7 +95,113 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                 .build();
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
+
+        mActivityComponent.inject(this);
+
+//        Toast.makeText(this, "LOGIN TIME " + dataManager.getLastLoginTime(), Toast.LENGTH_SHORT).show();
+
+/*
+        HandlerThread handlerThread = new HandlerThread(getClass().getCanonicalName());
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper()) {
+
+        };
+
+        handler.post(() -> {
+            try {
+                while (true) {
+
+                    if (isSessionExpired()){
+
+                        Log.d("BaseAc", "Session check expired");
+                    }else{
+                        Log.d("BaseAc", "Session check not expired");
+
+                    }
+                    sleep(1000);
+
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        });*/
+
     }
+
+
+
+/*
+        try {
+                while (true) {
+
+                Log.d("BaseAc", "Session check " + isSessionExpired());
+                sleep(1000);
+
+                }
+                } catch (InterruptedException e) {
+                e.printStackTrace();
+                }
+*/
+
+
+    private boolean isSessionExpired() {
+        if (!isLoggedIn()) {
+            showToast("Сессия истекла");
+
+            Log.d("Base", "не залогинен");
+            /*// 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("Сессия истекла");
+
+            makeHighSound(getApplicationContext());
+
+            builder.setCancelable(false);
+//        builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
+            builder.setNegativeButton("OK", ((dialog, which) -> {
+                dialog.dismiss();
+                startLoginActivity(this);
+            }));
+
+            // 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+*/
+            return true;
+        }
+        Log.d("Base", "залогинен");
+        return false;
+    }
+
+    public boolean isLoggedIn() {
+        String lastLoginTime = dataManager.getLastLoginTime();
+        Long l = 0L;
+//        int fifteenMinInMs = 900000;
+        int fifteenMinInMs = 100000;
+
+        if (lastLoginTime.equals("no_login_time")) return false;
+
+        SimpleDateFormat formatter3 = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.US);
+
+//        SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+        try {
+            Date date = formatter3.parse(lastLoginTime);
+            Date currentDate = new Date();
+            l = currentDate.getTime() - date.getTime();
+
+
+            Log.d("LoginPresenter: ", "current tiem is " + currentDate.getTime() + " logtime is " + date.getTime() + " difference is " + l);
+
+        } catch (ParseException e) {
+            Log.d("LoginPresenter: ", e.toString());
+        }
+
+        return l < fifteenMinInMs;
+
+    }
+
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -121,7 +243,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         activity1.startActivity(new Intent(activity1, activity2.getClass()));
     }
 
-    public void startLoginActivity(Activity activity){
+    public void startLoginActivity(Activity activity) {
         activity.startActivity(new Intent(activity, LoginActivity.class));
     }
 
@@ -227,7 +349,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     }
 
 
-
     public void makeHighSound(Context ctx) {
         //it'll increase volume up to 90 under any circumstances
         AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -235,7 +356,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 //        int currentVolume = 60;
         int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         float percent = 0.6f;
-        int seventyVolume = (int) (maxVolume*percent);
+        int seventyVolume = (int) (maxVolume * percent);
         audio.setStreamVolume(AudioManager.STREAM_MUSIC, seventyVolume, 0);
 
         AssetManager am;

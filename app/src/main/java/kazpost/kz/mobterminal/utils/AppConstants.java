@@ -12,8 +12,9 @@ public class AppConstants {
 
     public static final int ScannerSelectionBarcodeActivity = 1;
 
-//    public static final String BASE_URL = "http://172.30.223.25:8088/";       //тестовый
-    public static final String BASE_URL = "http://172.30.73.113:8080/";         //боевой
+//    public static final String BASE_URL = "http://172.30.223.25:8088/";       //тестовый старый, отключен
+    public static final String BASE_URL = "http://172.30.73.19:8088/";       //тестовый c января 2018
+//    public static final String BASE_URL = "http://172.30.73.113:8080/";         //боевой
 
 
     public static final String G_NUMBER = "G_NUMBER";

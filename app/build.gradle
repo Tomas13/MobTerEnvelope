@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "kazpost.kz.mobterminal"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 12
-        versionName "Боевой 12"
+        versionName "Тестовый 12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,15 +53,15 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.google.dagger:dagger:2.9'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.android.support:design:27.0.2'
+    compile 'com.google.dagger:dagger:2.11'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     compile 'io.reactivex:rxandroid:1.2.1'
@@ -70,7 +69,9 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.akexorcist:bluetoothspp:1.0.0'
     testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     provided 'javax.annotation:jsr250-api:1.0'
+
+    compile 'com.blankj:utilcode:1.10.0'
 }

@@ -1,16 +1,12 @@
 package kazpost.kz.mobterminal.ui.print;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -59,7 +55,6 @@ public class ChoosePrinterActivity extends BaseActivity {
         getActivityComponent().inject(this);
 
         getPrinter();
-
     }
 
     private void getPrinter() {
@@ -112,10 +107,7 @@ public class ChoosePrinterActivity extends BaseActivity {
         String printerIp = etIpAddress.getText().toString();
 
         if (printerName.length() > 0 && printerIp.length() > 0 && serverIp.length() > 0) {
-
-
             dataManager.savePrinter(serverIp, printerIp, printerName);
-
         } else {
             onErrorToast("Сканируйте ip-адрес и название");
         }
@@ -156,9 +148,7 @@ public class ChoosePrinterActivity extends BaseActivity {
                             showPrintSuccessOrFailureDialog("Печать успешна");
                             Log.d("PrintA", responseBody.toString());
                         },
-                        throwable ->
-
-                        {
+                        throwable -> {
                             hideLoading();
                             showErrorDialog(throwable.getMessage());
 //                            showPrintSuccessOrFailureDialog(throwable.getMessage());
@@ -169,12 +159,9 @@ public class ChoosePrinterActivity extends BaseActivity {
     private void showPrintSuccessOrFailureDialog(String msg) {
         // 1. Instantiate an AlertDialog.Builder with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         // 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage(msg);
-
         builder.setNegativeButton("Ok", ((dialog, which) -> dialog.dismiss()));
-
         builder.setCancelable(false);
         // 3. Get the AlertDialog from create()
         AlertDialog dialog = builder.create();

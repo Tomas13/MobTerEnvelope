@@ -89,7 +89,17 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
                                 String sessioId = envelope.getBody().getAuthorizeResponse().getSessionId();
 
                                 getDataManager().saveSessionId(sessioId);
-                                getDataManager().saveLastLoginTime(responseGenTime);
+//                                getDataManager().saveLastLoginTime(responseGenTime);
+
+//                                SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+                                SimpleDateFormat formatter3 = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.US);
+                                try {
+                                    Date date = formatter3.parse(String.valueOf(new Date()));
+                                    getDataManager().saveLastLoginTime(date.toString());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
 
                                 getMvpView().openMainActivity();
 

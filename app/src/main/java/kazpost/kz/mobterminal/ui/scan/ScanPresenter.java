@@ -142,12 +142,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                 case "0":
 
                                     //success
-                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText()
-
-                                    + "    Вес: " + bagWeight + "  Кол-во: " + quantity);
-//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getBagWeight());
-//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getMailQuantity());
-
+                                    getMvpView().onErrorToast(text + "    Вес: " + bagWeight + "  Кол-во: " + quantity);
                                     getMvpView().readyForNextScan();
                                     break;
 
@@ -162,14 +157,12 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                     break;
                                 case "300": //Мешок не найден
                                     getMvpView().showMistakeDialog(text);
-//                                    getMvpView().onErrorToast(text);
                                     getMvpView().clearBagEditText();
                                     break;
 
                                 case "6":
                                     //ШПИ уже добавлен в другой документ
                                     getMvpView().showMistakeDialog(text);
-//                                    getMvpView().onErrorToast(envelope.getBody().getParcelToBagResponse().getResponseInfo().getResponseText());
                                     getMvpView().readyForNextScan();
                                     break;
 

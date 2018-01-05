@@ -26,7 +26,6 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
     public void onConfigPrinterBtnClicked() {
         getMvpView().onError("config printer");
         getMvpView().openConfigPrinter();
-
     }
 
     @Override

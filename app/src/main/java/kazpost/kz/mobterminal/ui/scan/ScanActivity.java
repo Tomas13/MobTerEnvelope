@@ -112,7 +112,6 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
         etScanBagActivity.setVisibility(View.GONE);
         etScanActivity.setVisibility(View.VISIBLE);
 
-
     }
 
     @Override

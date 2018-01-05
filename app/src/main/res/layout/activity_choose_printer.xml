@@ -1,97 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/tv_server"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorBlueLight"
-        android:text="IP-адрес"
-        android:visibility="gone" />
+        tools:context="kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/tv_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorBlueLight"
+            android:text="IP-адрес"
+            android:visibility="gone" />
 
 
-    <TextView
-        android:id="@+id/tv_scan_ip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_server"
-        android:layout_margin="5dp"
-        android:background="@color/colorBlueLight"
-        android:text="@string/scanipname"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/ll_printer_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_scan_ip"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/et_server_address"
+        <TextView
+            android:id="@+id/tv_scan_ip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_server"
-            android:hint="ip-адрес сервера"
-            android:visibility="visible" />
+            android:layout_margin="5dp"
+            android:background="@color/colorBlueLight"
+            android:text="@string/scanipname"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/et_ip_address"
+        <LinearLayout
+            android:id="@+id/ll_printer_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ip_address" />
+            android:layout_below="@id/tv_scan_ip"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_printer_name"
+            <EditText
+                android:id="@+id/et_server_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ip_address_server_hint"
+                android:imeOptions="flagNoFullscreen"
+                android:inputType="number|text"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/et_ip_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ip_address"
+                android:imeOptions="flagNoFullscreen"
+                android:inputType="number|text" />
+
+            <EditText
+                android:id="@+id/et_printer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/printer_name"
+                android:imeOptions="actionDone|flagNoFullscreen"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save_printer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_printer_info"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/save_printer" />
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/printer_name" />
+            android:layout_below="@id/btn_save_printer"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_back_choose_printer"
+                style="@style/BlueButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back" />
 
-    <Button
-        android:id="@+id/btn_save_printer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_printer_info"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/save_printer" />
+            <Button
+                android:id="@+id/btn_test_print"
+                style="@style/BlueButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/test_print" />
+        </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_save_printer"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-
-        <Button
-            android:id="@+id/btn_back_choose_printer"
-            style="@style/BlueButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/back" />
-
-        <Button
-            android:id="@+id/btn_test_print"
-            style="@style/BlueButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/test_print" />
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

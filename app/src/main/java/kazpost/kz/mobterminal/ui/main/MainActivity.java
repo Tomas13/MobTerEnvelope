@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -23,14 +22,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Inject
     MainMvpPresenter<MainMvpView> mPresenter;
-    @BindView(R.id.btn_sort)
-    Button btnSort;
-    @BindView(R.id.btn_close_cell)
-    Button btnCloseCell;
-    @BindView(R.id.btn_config_printer)
-    Button btnConfigPrinter;
-    @BindView(R.id.btn_exit)
-    Button btnExit;
     @BindView(R.id.tv_version_name)
     TextView tvVersionName;
 
@@ -62,7 +53,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void openConfigPrinter() {
         startActivity(this, new ChoosePrinterActivity());
-
     }
 
     @Override

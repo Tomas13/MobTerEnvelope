@@ -47,4 +47,7 @@
     <string name="go_to_main">В главное меню</string>
     <string name="test_print">Тестовая печать</string>
     <string name="save_printer">Выбрать принтер</string>
+    <string name="sort_open_bag">Сортировка Открытого Мешка</string>
+    <string name="sort_saktandiry">Сортировка Сактандыру</string>
+    <string name="ip_address_server_hint">ip-адрес сервера</string>
 </resources>
