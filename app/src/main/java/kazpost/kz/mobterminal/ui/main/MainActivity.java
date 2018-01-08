@@ -15,6 +15,7 @@ import kazpost.kz.mobterminal.BuildConfig;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
+import kazpost.kz.mobterminal.ui.openbagscan.OpenBagScanActivity;
 import kazpost.kz.mobterminal.ui.print.ChoosePrinterActivity;
 import kazpost.kz.mobterminal.ui.scan.ScanActivity;
 
@@ -51,6 +52,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
+    public void openScanOpenBagActivity() {
+        startActivity(this, new OpenBagScanActivity());
+    }
+
+    @Override
     public void openConfigPrinter() {
         startActivity(this, new ChoosePrinterActivity());
     }
@@ -60,11 +66,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         startActivity(this, new CloseCellActivity());
     }
 
-    @OnClick({R.id.btn_sort, R.id.btn_close_cell, R.id.btn_config_printer, R.id.btn_exit})
+    @OnClick({R.id.btn_sort, R.id.btn_close_cell, R.id.btn_sort_open_bag, R.id.btn_config_printer, R.id.btn_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_sort:
                 mPresenter.onSortBtnClicked();
+                break;
+            case R.id.btn_sort_open_bag:
+                mPresenter.onSortOpenBagBtnClicked();
                 break;
             case R.id.btn_close_cell:
                 mPresenter.onCloseCellBtnClicked();

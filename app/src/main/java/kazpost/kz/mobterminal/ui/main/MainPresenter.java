@@ -37,4 +37,9 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
     public void onExit() {
         getDataManager().removeLastLoginTime();
     }
+
+    @Override
+    public void onSortOpenBagBtnClicked() {
+        getMvpView().openScanOpenBagActivity();
+    }
 }

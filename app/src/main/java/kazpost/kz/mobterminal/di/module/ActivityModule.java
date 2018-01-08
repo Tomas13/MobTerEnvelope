@@ -31,6 +31,9 @@ import kazpost.kz.mobterminal.ui.login.LoginPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpPresenter;
 import kazpost.kz.mobterminal.ui.main.MainMvpView;
 import kazpost.kz.mobterminal.ui.main.MainPresenter;
+import kazpost.kz.mobterminal.ui.openbagscan.OpenBagMvpPresenter;
+import kazpost.kz.mobterminal.ui.openbagscan.OpenBagPresenter;
+import kazpost.kz.mobterminal.ui.openbagscan.OpenBagScanView;
 import kazpost.kz.mobterminal.ui.scan.ScanMvpPresenter;
 import kazpost.kz.mobterminal.ui.scan.ScanMvpView;
 import kazpost.kz.mobterminal.ui.scan.ScanPresenter;
@@ -84,6 +87,12 @@ public class ActivityModule {
     @Provides
     @PerActivity
     ScanMvpPresenter<ScanMvpView> provideScanPresenter(ScanPresenter<ScanMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    OpenBagMvpPresenter<OpenBagScanView> provideOpenBagScanPresenter(OpenBagPresenter<OpenBagScanView> presenter){
         return presenter;
     }
 }

@@ -3,6 +3,7 @@ package kazpost.kz.mobterminal.data.network;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
 import kazpost.kz.mobterminal.data.network.model.closebag.CloseBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
+import kazpost.kz.mobterminal.data.network.model.openbag.ScanOpenBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import okhttp3.ResponseBody;
@@ -37,4 +38,10 @@ public interface NetworkService {
 
     @GET("/")
     Observable<ResponseBody> sendToPrint();
+
+
+    @POST("mobiterminal/endpoint")
+    @Headers("Content-Type: text/xml")
+    Observable<kazpost.kz.mobterminal.data.network.model.openbag.Envelope> doFindOpenBagPlan(@Body ScanOpenBagEnvelope scanOpenBagEnvelope);
+
 }

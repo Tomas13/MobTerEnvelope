@@ -131,8 +131,6 @@ public class ApplicationModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        
-//                .baseUrl("http://172.30.223.25:8088/mobiterminal/Terminal.wsdl/")
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .build();

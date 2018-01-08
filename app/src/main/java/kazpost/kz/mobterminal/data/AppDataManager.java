@@ -9,6 +9,7 @@ import kazpost.kz.mobterminal.data.network.ApiHelper;
 import kazpost.kz.mobterminal.data.network.model.Envelope;
 import kazpost.kz.mobterminal.data.network.model.closebag.CloseBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.findplan.FindPlanEnvelope;
+import kazpost.kz.mobterminal.data.network.model.openbag.ScanOpenBagEnvelope;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.data.network.model.request.RequestEnvelope;
 import kazpost.kz.mobterminal.data.prefs.PreferencesHelper;
@@ -56,6 +57,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<kazpost.kz.mobterminal.data.network.model.findplan.Envelope> doFindPlan(FindPlanEnvelope findPlanEnvelope) {
         return mApiHelper.doFindPlan(findPlanEnvelope);
+    }
+
+    @Override
+    public Observable<kazpost.kz.mobterminal.data.network.model.openbag.Envelope> doFindOpenBagPlan(ScanOpenBagEnvelope scanOpenBagEnvelope) {
+        return mApiHelper.doFindOpenBagPlan(scanOpenBagEnvelope);
     }
 
     @Override

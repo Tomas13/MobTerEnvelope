@@ -30,4 +30,6 @@ public interface MainMvpView extends MvpView {
     void openConfigPrinter();
 
     void openCloseCellActivity();
+
+    void openScanOpenBagActivity();
 }
