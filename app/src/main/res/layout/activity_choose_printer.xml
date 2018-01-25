@@ -88,6 +88,7 @@
                 style="@style/BlueButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:text="@string/back" />
 
@@ -96,6 +97,7 @@
                 style="@style/BlueButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:text="@string/test_print" />
         </LinearLayout>

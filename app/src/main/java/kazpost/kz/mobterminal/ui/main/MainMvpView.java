@@ -18,18 +18,12 @@ package kazpost.kz.mobterminal.ui.main;
 
 import kazpost.kz.mobterminal.ui.base.MvpView;
 
-/**
- * Created by janisharali on 27/01/17.
- */
 
 public interface MainMvpView extends MvpView {
-
 
     void openScanActivity();
 
     void openConfigPrinter();
 
-    void openCloseCellActivity();
-
-    void openScanOpenBagActivity();
+    void openChooseCloseActivity();
 }

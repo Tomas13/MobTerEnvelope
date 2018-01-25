@@ -19,9 +19,6 @@ package kazpost.kz.mobterminal.ui.main;
 import kazpost.kz.mobterminal.di.PerActivity;
 import kazpost.kz.mobterminal.ui.base.MvpPresenter;
 
-/**
- * Created by janisharali on 27/01/17.
- */
 
 @PerActivity
 public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V> {
@@ -34,5 +31,4 @@ public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V>
 
     void onExit();
 
-    void onSortOpenBagBtnClicked();
 }

@@ -16,9 +16,7 @@ import kazpost.kz.mobterminal.di.module.ApplicationModule;
  * Created by root on 4/11/17.
  */
 
-public class MyApp extends Application{
-
-
+public class MyApp extends Application {
 
     @Inject
     DataManager mDataManager;

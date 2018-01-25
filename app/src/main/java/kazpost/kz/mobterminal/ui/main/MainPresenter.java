@@ -30,7 +30,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
 
     @Override
     public void onCloseCellBtnClicked() {
-        getMvpView().openCloseCellActivity();
+        getMvpView().openChooseCloseActivity();
     }
 
     @Override
@@ -38,8 +38,4 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
         getDataManager().removeLastLoginTime();
     }
 
-    @Override
-    public void onSortOpenBagBtnClicked() {
-        getMvpView().openScanOpenBagActivity();
-    }
 }
