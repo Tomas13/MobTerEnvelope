@@ -19,6 +19,7 @@ import kazpost.kz.mobterminal.di.module.ApplicationModule;
 public class MyApp extends Application{
 
 
+
     @Inject
     DataManager mDataManager;
 

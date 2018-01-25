@@ -61,7 +61,7 @@ public class OpenBagPresenter<V extends OpenBagScanView> extends BasePresenter<V
 //                                    getMvpView().showBagTrackNumber(envelope.getBody().getFindPlanResponse().getBagBarcode(),
 //                                            envelope.getBody().getFindPlanResponse().getBagNumber());
 
-                                    getMvpView().showMistakeDialog(responseInfo.getResponseText());
+                                    getMvpView().showMistakeDialog(true);
                                     break;
 
                                 case "103": //User not authorized

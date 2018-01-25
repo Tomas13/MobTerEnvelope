@@ -82,20 +82,13 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
             onErrorToast(getString(R.string.pin_length));
         }
 
-
-/*
-        if (userBarcode.length() > 0) {
-            mPresenter.onLoginBtnClicked(userBarcode, userPin);
-        } else {
-            onErrorToast(getString(R.string.no_user_barcode));
-        }
-*/
-
     }
 
     @Override
     public void openMainActivity() {
         Intent intent = MainActivity.getStartIntent(LoginActivity.this);
+//
+//        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

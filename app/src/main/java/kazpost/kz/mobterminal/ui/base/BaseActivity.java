@@ -9,15 +9,12 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -47,8 +40,6 @@ import kazpost.kz.mobterminal.ui.login.LoginActivity;
 import kazpost.kz.mobterminal.utils.CommonUtils;
 import kazpost.kz.mobterminal.utils.NetworkUtils;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by root on 4/11/17.
  */
@@ -61,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
-    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
+//    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
     private long mActivityId;
 
     @Inject
@@ -97,111 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             getSupportActionBar().hide();
 
         mActivityComponent.inject(this);
-
-//        Toast.makeText(this, "LOGIN TIME " + dataManager.getLastLoginTime(), Toast.LENGTH_SHORT).show();
-
-/*
-        HandlerThread handlerThread = new HandlerThread(getClass().getCanonicalName());
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper()) {
-
-        };
-
-        handler.post(() -> {
-            try {
-                while (true) {
-
-                    if (isSessionExpired()){
-
-                        Log.d("BaseAc", "Session check expired");
-                    }else{
-                        Log.d("BaseAc", "Session check not expired");
-
-                    }
-                    sleep(1000);
-
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        });*/
-
     }
-
-
-
-/*
-        try {
-                while (true) {
-
-                Log.d("BaseAc", "Session check " + isSessionExpired());
-                sleep(1000);
-
-                }
-                } catch (InterruptedException e) {
-                e.printStackTrace();
-                }
-*/
-
-
-    private boolean isSessionExpired() {
-        if (!isLoggedIn()) {
-            showToast("Сессия истекла");
-
-            Log.d("Base", "не залогинен");
-            /*// 1. Instantiate an AlertDialog.Builder with its constructor
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage("Сессия истекла");
-
-            makeHighSound(getApplicationContext());
-
-            builder.setCancelable(false);
-//        builder.setPositiveButton("Да", (dialog, which) -> super.onBackPressed());
-            builder.setNegativeButton("OK", ((dialog, which) -> {
-                dialog.dismiss();
-                startLoginActivity(this);
-            }));
-
-            // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
-*/
-            return true;
-        }
-        Log.d("Base", "залогинен");
-        return false;
-    }
-
-    public boolean isLoggedIn() {
-        String lastLoginTime = dataManager.getLastLoginTime();
-        Long l = 0L;
-//        int fifteenMinInMs = 900000;
-        int fifteenMinInMs = 100000;
-
-        if (lastLoginTime.equals("no_login_time")) return false;
-
-        SimpleDateFormat formatter3 = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.US);
-
-//        SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
-        try {
-            Date date = formatter3.parse(lastLoginTime);
-            Date currentDate = new Date();
-            l = currentDate.getTime() - date.getTime();
-
-
-            Log.d("LoginPresenter: ", "current tiem is " + currentDate.getTime() + " logtime is " + date.getTime() + " difference is " + l);
-
-        } catch (ParseException e) {
-            Log.d("LoginPresenter: ", e.toString());
-        }
-
-        return l < fifteenMinInMs;
-
-    }
-
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -319,9 +206,9 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     @Override
     protected void onDestroy() {
-        if (!isChangingConfigurations()) {
-            sComponentsMap.remove(mActivityId);
-        }
+//        if (!isChangingConfigurations()) {
+//            sComponentsMap.remove(mActivityId);
+//        }
         super.onDestroy();
     }
 
@@ -368,18 +255,9 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                     afd.getLength() / 4);
             player.prepare();
             player.start();
-            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    // TODO Auto-generated method stub
-                    mp.release();
-                }
-
-            });
+            player.setOnCompletionListener(MediaPlayer::release);
             player.setLooping(false);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

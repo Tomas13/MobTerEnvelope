@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "kazpost.kz.mobterminal"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 25
         versionCode 12
         versionName "Тестовый 12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -53,9 +53,9 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:design:25.4.0'
     compile 'com.google.dagger:dagger:2.11'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
@@ -73,5 +73,4 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     provided 'javax.annotation:jsr250-api:1.0'
 
-    compile 'com.blankj:utilcode:1.10.0'
 }

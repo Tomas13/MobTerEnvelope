@@ -50,4 +50,9 @@
     <string name="sort_open_bag">Сортировка Открытого Мешка</string>
     <string name="sort_saktandiry">Сортировка Сактандыру</string>
     <string name="ip_address_server_hint">ip-адрес сервера</string>
+    <string name="success_close_open_bag">Открытый мешок успешно закрыт</string>
+    <string name="close_open_bag">Закрыть мешок</string>
+    <string name="choose_close_activity">Выберите тип мешка, который хотите закрыть</string>
+    <string name="insurance">Сактандыру</string>
+    <string name="open_bag">Открытый мешок</string>
 </resources>

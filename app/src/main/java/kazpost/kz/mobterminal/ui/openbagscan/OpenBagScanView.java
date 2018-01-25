@@ -10,6 +10,8 @@ public interface OpenBagScanView extends MvpView {
 
     void showMistakeDialog(String msg);
 
+    void showMistakeDialog(boolean success);
+
     void startLoginActivity();
 
     void clearEditText();

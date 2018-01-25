@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
+import kazpost.kz.mobterminal.ui.closecell.ChooseCloseActivity;
 import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 
@@ -149,7 +150,8 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
                 break;
             case R.id.btn_scan_go_to_close:
                 finish();
-                startActivity(this, new CloseCellActivity());
+//                startActivity(this, new CloseCellActivity());
+                startActivity(this, new ChooseCloseActivity());
                 break;
         }
     }

@@ -48,7 +48,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void openScanActivity() {
-        startActivity(this, new ScanActivity());
+//        startActivity(this, new ScanActivity());
+        startActivity(new Intent(this, ScanActivity.class));
     }
 
     @Override

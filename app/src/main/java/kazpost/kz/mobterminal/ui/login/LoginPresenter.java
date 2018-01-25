@@ -44,7 +44,8 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V> imp
         Long l = 0L;
         int fifteenMinInMs = 900000;
 
-        SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+//        SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+        SimpleDateFormat formatter3 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
         try {
             Date date = formatter3.parse(lastLoginTime);
             Date currentDate = new Date();
