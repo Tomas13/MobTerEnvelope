@@ -10,7 +10,6 @@ import org.simpleframework.xml.Root;
 @Root(name = "sch:CloseBagRequest", strict = false)
 public class CloseBagData {
 
-
     @Element(name = "sch:SessionId")
     private String ASessionId;
 
@@ -23,6 +22,8 @@ public class CloseBagData {
     @Element(name = "sch:Weight")
     private String DWeight;
 
+    @Element(name = "sch:vBagtype")
+    private int EBagType;
 
     public String getCSealNumber() {
         return CSealNumber;
@@ -54,5 +55,13 @@ public class CloseBagData {
 
     public void setBBagBarcode(String BBagBarcode) {
         this.BBagBarcode = BBagBarcode;
+    }
+
+    public int getEBagType() {
+        return EBagType;
+    }
+
+    public void setEBagType(int EBagType) {
+        this.EBagType = EBagType;
     }
 }

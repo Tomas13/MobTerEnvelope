@@ -3,6 +3,7 @@ package kazpost.kz.mobterminal.ui.closecell;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import butterknife.OnClick;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.print.PrintActivity;
+import kazpost.kz.mobterminal.utils.AppConstants;
 
 import static kazpost.kz.mobterminal.utils.AppConstants.PRINT_ACTIVITY;
 
@@ -37,6 +39,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     @BindView(R.id.btn_next_closecell)
     Button btnNextClosecell;
 
+    private int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,13 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
 
         getActivityComponent().inject(this);
         presenter.onAttach(CloseCellActivity.this);
+
+
+        if (getIntent().getExtras().get(AppConstants.BAG_TYPE) != null) {
+            type = getIntent().getExtras().getInt(AppConstants.BAG_TYPE);
+        }
+
+        Log.d("CloseVMAc", "onCreate: " + type);
 
     }
 
@@ -57,12 +68,13 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
                 break;
             case R.id.btn_next_closecell:
 
+
                 String bagBarcode = etCodeBag.getText().toString();
                 String sealNumber = etNumberSeal.getText().toString();
                 String wei = etWeight.getText().toString();
 
                 if (checkEmptyFields(bagBarcode, sealNumber, wei) && checkWeight(wei)) {
-                    presenter.closeBagRequest(bagBarcode, sealNumber, wei);
+                    presenter.closeBagRequest(bagBarcode, sealNumber, wei, type);
                 } /*else {
 //                    onErrorToast("Заполните все поля");
                 }

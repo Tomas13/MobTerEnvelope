@@ -43,7 +43,8 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
 
 
     @Override
-    public void closeBagRequest(String bagBar, String sealNum, String weight) {
+    public void closeBagRequest(String bagBar, String sealNum, String weight, int bagType) {
+
 
         getMvpView().showLoading();
 
@@ -62,7 +63,7 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
         getMvpView().hideLoading();*/
 
 
-        CloseBagEnvelope closeBagEnvelope = createBagEnvelope(bagBar, sealNum, weight);
+        CloseBagEnvelope closeBagEnvelope = createBagEnvelope(bagBar, sealNum, weight, bagType);
 
         Observable<Envelope> observable = getDataManager().doCloseBag(closeBagEnvelope);
         observable
@@ -119,7 +120,7 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
 
     }
 
-    private CloseBagEnvelope createBagEnvelope(String bagBar, String sealNum, String weight) {
+    private CloseBagEnvelope createBagEnvelope(String bagBar, String sealNum, String weight, int bagType) {
         CloseBagEnvelope closeBagEnvelope = new CloseBagEnvelope();
         CloseBagBody closeBagBody = new CloseBagBody();
         CloseBagData closeBagData = new CloseBagData();
@@ -128,6 +129,7 @@ public class CloseCellPresenter<V extends CloseCellMvpView> extends BasePresente
         closeBagData.setBBagBarcode(bagBar);
         closeBagData.setCSealNumber(sealNum);
         closeBagData.setDWeight(weight);
+        closeBagData.setEBagType(bagType);
 
         closeBagBody.setCloseBagData(closeBagData);
         closeBagEnvelope.setCloseBagBody(closeBagBody);
