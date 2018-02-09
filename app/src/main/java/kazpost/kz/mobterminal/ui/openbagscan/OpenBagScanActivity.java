@@ -1,7 +1,9 @@
 package kazpost.kz.mobterminal.ui.openbagscan;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import javax.inject.Inject;
 
@@ -24,6 +26,8 @@ public class OpenBagScanActivity extends BaseActivity implements OpenBagScanView
 
     @BindString(R.string.success_close_open_bag)
     String successCloseBagMsg;
+    @BindView(R.id.progress_insurance)
+    ProgressBar progressInsurance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,20 @@ public class OpenBagScanActivity extends BaseActivity implements OpenBagScanView
     @Override
     public void clearEditText() {
         etOpenbagScanActivity.setText("");
+    }
+
+    @Override
+    public void showLoading() {
+        progressInsurance.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (progressInsurance.getVisibility() == View.VISIBLE) {
+            progressInsurance.setVisibility(View.GONE);
+//
+//            relativeScan.setAlpha(1);
+        }
     }
 
     @Override

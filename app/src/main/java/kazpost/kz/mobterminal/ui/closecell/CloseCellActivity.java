@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +39,8 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     Button btnBackClosecell;
     @BindView(R.id.btn_next_closecell)
     Button btnNextClosecell;
+    @BindView(R.id.progress_close)
+    ProgressBar progressClose;
 
     private int type;
 
@@ -127,6 +130,20 @@ public class CloseCellActivity extends BaseActivity implements CloseCellMvpView 
     @Override
     public void showMistakeDialog(String msg) {
         showErrorDialog(msg);
+    }
+
+    @Override
+    public void showLoading() {
+        progressClose.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (progressClose.getVisibility() == View.VISIBLE) {
+            progressClose.setVisibility(View.GONE);
+
+//            relativeScan.setAlpha(1);
+        }
     }
 
 

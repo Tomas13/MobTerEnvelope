@@ -9,6 +9,7 @@ import kazpost.kz.mobterminal.ui.base.MvpView;
 public interface ScanMvpView extends MvpView {
 
     void clearEditText();
+
     void clearBagEditText();
 
     void showBagTrackNumber(String bagBarcode, String bagNumber);
@@ -18,5 +19,9 @@ public interface ScanMvpView extends MvpView {
     void startLoginActivity();
 
     void showMistakeDialog(String msg);
+
+    void showLoading();
+
+    void hideLoading();
 
 }

@@ -1,5 +1,7 @@
 package kazpost.kz.mobterminal.ui.base;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import kazpost.kz.mobterminal.data.DataManager;
@@ -29,7 +31,9 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
     @Override
     public void onDetach() {
+        Log.d("Scan", "onDetach: called from BasePresent");
         mMvpView = null;
+
     }
 
     public boolean isViewAttached() {

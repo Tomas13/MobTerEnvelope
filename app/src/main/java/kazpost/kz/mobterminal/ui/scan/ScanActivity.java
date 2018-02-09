@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -19,7 +21,6 @@ import butterknife.OnTextChanged;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.ui.base.BaseActivity;
 import kazpost.kz.mobterminal.ui.closecell.ChooseCloseActivity;
-import kazpost.kz.mobterminal.ui.closecell.CloseCellActivity;
 import kazpost.kz.mobterminal.ui.main.MainActivity;
 
 public class ScanActivity extends BaseActivity implements ScanMvpView {
@@ -55,6 +56,10 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
     Button btnScanGoToMain;
     @BindView(R.id.btn_scan_go_to_close)
     Button btnScanGoToClose;
+    @BindView(R.id.relative_scan)
+    RelativeLayout relativeScan;
+    @BindView(R.id.progress_scan)
+    ProgressBar progressScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +69,29 @@ public class ScanActivity extends BaseActivity implements ScanMvpView {
 
         getActivityComponent().inject(this);
         presenter.onAttach(ScanActivity.this);
+    }
+
+    @Override
+    public void showLoading() {
+
+        progressScan.setVisibility(View.VISIBLE);
+        relativeScan.setAlpha(0.5F);
+
+    }
+
+    @Override
+    public void hideLoading() {
+        if (progressScan.getVisibility() == View.VISIBLE) {
+            progressScan.setVisibility(View.GONE);
+
+            relativeScan.setAlpha(1);
+        }
 
     }
 
     @OnTextChanged(R.id.et_scan_activity)
     public void onScan() {
-        Log.d("ScanAc", " onScan called");
+//        Log.d("ScanAc", " onScan called");
         if (etScanActivity.getText().toString().length() == 13)
             presenter.onScan(etScanActivity.getText().toString());
     }

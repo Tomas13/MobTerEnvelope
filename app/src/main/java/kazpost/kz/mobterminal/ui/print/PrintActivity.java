@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -101,6 +102,8 @@ public class PrintActivity extends BaseActivity {
     String gNumber, sealNumber, weightResponse, fromDep,
             toDep, sendMethod, bagType, operatorName, date2,
             closeTime, ipAddress, printerName;
+    @BindView(R.id.progress_print)
+    ProgressBar progressPrint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +133,7 @@ public class PrintActivity extends BaseActivity {
                 Date date = formatter3.parse(closeTime);
                 SimpleDateFormat formatter2 = new SimpleDateFormat("dd.MM.yyyy 'в' HH:mm:ss", Locale.US);
                 date2 = formatter2.format(date);
-                Log.d("PrintActivity: ", date2);
+//                Log.d("PrintActivity: ", date2);
             } catch (ParseException e) {
                 Log.d("PrintActivity: ", e.toString());
             }
@@ -218,13 +221,28 @@ public class PrintActivity extends BaseActivity {
 //                            onErrorToast("Печать успешна");
 
                             showErrorDialog("Печать успешна");
-                            Log.d("PrintA", responseBody.toString());
+//                            Log.d("PrintA", responseBody.toString());
                         },
                         throwable -> {
                             hideLoading();
                             showErrorDialog(throwable.getMessage());
                             Log.d("PrintAT", throwable.getMessage());
                         });
+    }
+
+    private void hideLoading() {
+        if (progressPrint.getVisibility() == View.VISIBLE) {
+            progressPrint.setVisibility(View.GONE);
+
+//            relativeScan.setAlpha(1);
+        }
+        ;
+    }
+
+    private void showLoading() {
+        progressPrint.setVisibility(View.VISIBLE);
+
+//        relativeScan.setAlpha(0.5F);
     }
 
     @OnClick({R.id.btn_go_main, R.id.btn_repeat_print})

@@ -31,6 +31,7 @@ public abstract class BaseFragment extends Fragment implements MvpView{
         }
     }
 
+/*
     @Override
     public void showLoading() {
         if (mActivity != null) {
@@ -44,6 +45,7 @@ public abstract class BaseFragment extends Fragment implements MvpView{
             mActivity.hideLoading();
         }
     }
+*/
 
     @Override
     public void onError(String message) {

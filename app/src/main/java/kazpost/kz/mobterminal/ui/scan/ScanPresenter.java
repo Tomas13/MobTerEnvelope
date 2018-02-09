@@ -2,6 +2,8 @@ package kazpost.kz.mobterminal.ui.scan;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import kazpost.kz.mobterminal.data.DataManager;
@@ -14,8 +16,10 @@ import kazpost.kz.mobterminal.data.network.model.parcel.ParcelData;
 import kazpost.kz.mobterminal.data.network.model.parcel.ParcelEnvelope;
 import kazpost.kz.mobterminal.ui.base.BasePresenter;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by root on 4/17/17.
@@ -25,6 +29,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
     private static final String TAG = "ScanPresenter";
 
+    private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
     @Inject
     public ScanPresenter(DataManager dataManager) {
@@ -50,11 +55,12 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
         Observable<Envelope> observable = getDataManager().doFindPlan(findPlanEnvelope);
 
-        observable
+        Subscription subscription = observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         envelope -> {
+
                             Envelope.ResponseInfo responseInfo = envelope.getBody().getFindPlanResponse().getResponseInfo();
                             String text = envelope.getBody().getFindPlanResponse().getResponseInfo().getResponseText();
 
@@ -85,6 +91,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                                 case "MD-07001":    //ШПИ не найден
                                     getMvpView().showMistakeDialog(text);
                                     getMvpView().readyForNextScan();
+
                                     break;
 
                                 default:
@@ -97,6 +104,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                             }
 
                             getMvpView().hideLoading();
+
                         },
                         throwable -> {
                             Log.d(TAG, "throwable " + throwable.getMessage());
@@ -107,7 +115,10 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                         });
 
 
+        compositeSubscription.add(subscription);
+
     }
+
 
     @Override
     public void onBagScan(String parcelBarcode, String bagBarcode) {
@@ -128,7 +139,7 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
 
         Observable<kazpost.kz.mobterminal.data.network.model.parcel.Envelope> observable = getDataManager().doParcelToBag(parcelEnvelope);
 
-        observable
+        Subscription subscription = observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(envelope -> {
@@ -177,6 +188,15 @@ public class ScanPresenter<V extends ScanMvpView> extends BasePresenter<V> imple
                             getMvpView().showMistakeDialog(throwable.getMessage());
                             getMvpView().hideLoading();
                         });
+
+        compositeSubscription.add(subscription);
+
     }
 
+
+    @Override
+    public void onDetach() {
+        compositeSubscription.clear();
+//        Log.d(TAG, "onDetach: called from ScanPresent, compositeSubsctiption.clear()");
+    }
 }

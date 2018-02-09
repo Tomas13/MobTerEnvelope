@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -40,6 +41,8 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     Button btnBarcode;
     @BindView(R.id.tv_version_name_login)
     TextView tvVersionNameLogin;
+    @BindView(R.id.progress_login)
+    ProgressBar progressLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,20 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
         etPin.requestFocus();
         tvLogin.setText(enterPin);
+    }
+
+    @Override
+    public void showLoading() {
+        progressLogin.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (progressLogin.getVisibility() == View.VISIBLE) {
+            progressLogin.setVisibility(View.GONE);
+
+//            relativeScan.setAlpha(1);
+        }
     }
 
 

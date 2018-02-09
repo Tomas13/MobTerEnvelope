@@ -16,5 +16,8 @@ public interface CloseCellMvpView extends MvpView {
 
     void showMistakeDialog(String msg);
 
+    void showLoading();
+
+    void hideLoading();
 
 }

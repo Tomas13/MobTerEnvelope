@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.inject.Inject;
@@ -33,11 +32,9 @@ import kazpost.kz.mobterminal.MyApp;
 import kazpost.kz.mobterminal.R;
 import kazpost.kz.mobterminal.data.DataManager;
 import kazpost.kz.mobterminal.di.component.ActivityComponent;
-import kazpost.kz.mobterminal.di.component.ConfigPersistentComponent;
 import kazpost.kz.mobterminal.di.component.DaggerActivityComponent;
 import kazpost.kz.mobterminal.di.module.ActivityModule;
 import kazpost.kz.mobterminal.ui.login.LoginActivity;
-import kazpost.kz.mobterminal.utils.CommonUtils;
 import kazpost.kz.mobterminal.utils.NetworkUtils;
 
 /**
@@ -46,14 +43,12 @@ import kazpost.kz.mobterminal.utils.NetworkUtils;
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView, BaseFragment.Callback {
 
-    private ProgressDialog mProgressDialog;
-
     private ActivityComponent mActivityComponent;
 
-    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
-    private static final AtomicLong NEXT_ID = new AtomicLong(0);
+//    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
+//    private static final AtomicLong NEXT_ID = new AtomicLong(0);
 //    private static final Map<Long, ConfigPersistentComponent> sComponentsMap = new HashMap<>();
-    private long mActivityId;
+//    private long mActivityId;
 
     @Inject
     DataManager dataManager;
@@ -94,19 +89,21 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         return mActivityComponent;
     }
 
-    @Override
+    /*@Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this);
-    }
 
-    @Override
+
+//        mProgressDialog = CommonUtils.showLoadingDialog(this);
+    }
+*/
+  /*  @Override
     public void hideLoading() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.cancel();
         }
     }
-
+*/
     @Override
     public void onError(String message) {
         if (message != null) {
@@ -201,7 +198,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(KEY_ACTIVITY_ID, mActivityId);
+//        outState.putLong(KEY_ACTIVITY_ID, mActivityId);
     }
 
     @Override
@@ -209,6 +206,15 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 //        if (!isChangingConfigurations()) {
 //            sComponentsMap.remove(mActivityId);
 //        }
+
+
+        try {
+            if (afd != null) {
+                afd.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 
@@ -235,6 +241,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         dialog.show();
     }
 
+private     AssetFileDescriptor afd;
+
 
     public void makeHighSound(Context ctx) {
         //it'll increase volume up to 90 under any circumstances
@@ -249,7 +257,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         AssetManager am;
         try {
             am = ctx.getAssets();
-            AssetFileDescriptor afd = am.openFd("burglar.wav");
+            afd = am.openFd("burglar.wav");
             MediaPlayer player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
                     afd.getLength() / 4);
@@ -257,8 +265,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             player.start();
             player.setOnCompletionListener(MediaPlayer::release);
             player.setLooping(false);
+
+//            player.release();
+//            audio.unloadSoundEffects();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
+
     }
 }

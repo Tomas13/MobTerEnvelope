@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,8 @@ public class ChoosePrinterActivity extends BaseActivity {
     @BindView(R.id.btn_test_print)
     Button btnTestPrint;
     String ipAddress, printerName;
+    @BindView(R.id.progress_choose)
+    ProgressBar progressChoose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +149,7 @@ public class ChoosePrinterActivity extends BaseActivity {
                 .subscribe(responseBody -> {
                             hideLoading();
                             showPrintSuccessOrFailureDialog("Печать успешна");
-                            Log.d("PrintA", responseBody.toString());
+//                            Log.d("PrintA", responseBody.toString());
                         },
                         throwable -> {
                             hideLoading();
@@ -155,6 +158,22 @@ public class ChoosePrinterActivity extends BaseActivity {
                             Log.d("PrintAT", throwable.getMessage());
                         });
     }
+
+    private void hideLoading() {
+        if (progressChoose.getVisibility() == View.VISIBLE) {
+            progressChoose.setVisibility(View.GONE);
+
+//            relativeScan.setAlpha(1);
+        }
+        ;
+    }
+
+    private void showLoading() {
+        progressChoose.setVisibility(View.VISIBLE);
+
+//        relativeScan.setAlpha(0.5F);
+    }
+
 
     private void showPrintSuccessOrFailureDialog(String msg) {
         // 1. Instantiate an AlertDialog.Builder with its constructor

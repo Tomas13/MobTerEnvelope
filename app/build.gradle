@@ -7,8 +7,8 @@ android {
         applicationId "kazpost.kz.mobterminal"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 12
-        versionName "Тестовый 12"
+        versionCode 13
+        versionName "Тестовый 13"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -45,7 +45,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile files('libs/DataCollection.jar')
+//    compile files('libs/DataCollection.jar')
 
     compile('com.squareup.retrofit2:converter-simplexml:2.2.0') {
         exclude group: 'stax', module: 'stax-api'

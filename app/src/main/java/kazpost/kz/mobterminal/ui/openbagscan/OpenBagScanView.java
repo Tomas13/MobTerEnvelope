@@ -16,4 +16,7 @@ public interface OpenBagScanView extends MvpView {
 
     void clearEditText();
 
+    void showLoading();
+
+    void hideLoading();
 }

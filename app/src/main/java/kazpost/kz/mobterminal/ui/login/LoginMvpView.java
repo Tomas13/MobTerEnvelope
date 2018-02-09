@@ -27,4 +27,8 @@ public interface LoginMvpView extends MvpView {
     void openMainActivity();
 
     void showPinEditText();
+
+    void showLoading();
+
+    void hideLoading();
 }

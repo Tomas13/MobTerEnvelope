@@ -28,9 +28,9 @@ import android.support.annotation.StringRes;
  */
 public interface MvpView {
 
-    void showLoading();
+//    void showLoading();
 
-    void hideLoading();
+//    void hideLoading();
 
 //    void openActivityOnTokenExpire();
 
