@@ -1,7 +1,6 @@
 package kazpost.kz.mobterminal.ui.base;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -15,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicLong;
 
 import javax.inject.Inject;
 
@@ -136,7 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
+        TextView textView = sbView
                 .findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
@@ -241,7 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         dialog.show();
     }
 
-private     AssetFileDescriptor afd;
+    private AssetFileDescriptor afd;
 
 
     public void makeHighSound(Context ctx) {

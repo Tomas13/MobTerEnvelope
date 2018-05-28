@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "kazpost.kz.mobterminal"
         minSdkVersion 17
@@ -40,40 +40,37 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-//    compile files('libs/DataCollection.jar')
+//    implementation files('libs/DataCollection.jar')
 
-    compile('com.squareup.retrofit2:converter-simplexml:2.2.0') {
+    implementation('com.squareup.retrofit2:converter-simplexml:2.2.0') {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.google.dagger:dagger:2.11'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.akexorcist:bluetoothspp:1.0.0'
-    testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.google.dagger:dagger:2.12'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.1.6'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'com.akexorcist:bluetoothspp:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    provided 'javax.annotation:jsr250-api:1.0'
-
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
 
 }
